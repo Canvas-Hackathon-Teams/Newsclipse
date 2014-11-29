@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}(Untitled){% endblock %} - {{config.APP_NAME}}</title>
-    <meta name="description" content="{% block description %}{% endblock %}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}(Untitled){% endblock %} - {{config.PROJECT_DESCRIPTION}}</title>
+        <meta name="description" content="{% block description %}{% endblock %}">
 
-    {% assets "css" %}
-      <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
-    {% endassets %}
-  </head>
-  <body>
-    <div class="container">
-      <header>
-      </header>
-      {% block content %}{% endblock %}
-      <footer>
-      </footer>
+        {% assets "css" %}
+        <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
+        {% endassets %}
+    </head>
+    <body>
+        <header>
+        </header>
+
+        <div class="container">
+
+            {% block content %}{% endblock %}
+
+        </div><!-- /.container -->
+
+        <footer>
+        </footer>
     </div>
     {% assets "tmpl" %}
-      <script src="{{ ASSET_URL }}"></script>
+    <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
     {% assets "js" %}
-      <script src="{{ ASSET_URL }}"></script>
+    <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
-  </body>
+</body>
 </html>
