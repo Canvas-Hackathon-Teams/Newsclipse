@@ -1,17 +1,14 @@
 from flask import render_template, request
-from bson.objectid import ObjectId
 #from restpager import Pager
 
 from newsclipse.core import app
-from newsclipse.db import db, stories
+from newsclipse.db import stories, get_story, cards
 from newsclipse.util import obj_or_404, jsonify
 from newsclipse.queue import extract, lookup
 
 
 @app.route('/')
 def home():
-    extract.delay('huhu')
-    #pager = Pager(search_block(q))
     return render_template("index.html")
 
 
@@ -22,23 +19,65 @@ def stories_index():
 
 @app.route('/api/stories', methods=['POST', 'PUT'])
 def stories_create():
-    story = request.json
+    story = dict(request.json)
+    story.pop('_id', None)
+    story['cards'] = []
     ret = stories.insert(story)
-    return jsonify(stories.find_one({'_id': ret}))
+    extract.delay(unicode(ret))
+    return stories_get(ret)
 
 
 @app.route('/api/stories/<id>', methods=['GET'])
 def stories_get(id):
-    id = ObjectId(id)
-    story = obj_or_404(stories.find_one({'_id': id}))
-    return jsonify(story)
+    return jsonify(get_story(id))
 
 
 @app.route('/api/stories/<id>', methods=['POST', 'PUT'])
 def stories_update(id):
-    id = ObjectId(id)
-    story = obj_or_404(stories.find_one({'_id': id}))
-    stories.update({'_id': id}, {'$set': request.json})
-    story = obj_or_404(stories.find_one({'_id': id}))
-    return jsonify(story)
+    story = get_story(id)
+    data = dict(request.json)
+    data.pop('_id', None)
+    data.pop('cards', None)
+    stories.update({'_id': story['_id']}, {'$set': data})
+    extract.delay(id)
+    return jsonify(get_story(id))
+
+
+@app.route('/api/stories/<story_id>/cards', methods=['GET'])
+def cards_index(story_id):
+    story = get_story(story_id)
+    return jsonify(cards.find({'story_id': story['_id']}))
+
+
+@app.route('/api/stories/<story_id>/cards', methods=['POST', 'PUT'])
+def cards_create(story_id):
+    story = get_story(story_id)
+    card = dict(request.json)
+    card.pop('_id', None)
+    card['story_id'] = story['_id']
+    ret = cards.insert(card)
+    stories.update({'_id': story['_id']}, {'$addToSet': {'cards': ret}})
+    return jsonify(cards.find_one({'_id': ret}))
+
+
+@app.route('/api/stories/<story_id>/cards/<card_id>', methods=['GET'])
+def cards_get(story_id, card_id):
+    story = get_story(story_id)
+    q = {'_id': id, 'story_id': story['_id']}
+    return obj_or_404(cards.find_one(q))
+
+
+@app.route('/api/stories/<story_id>/cards/<card_id>', methods=['POST', 'PUT'])
+def cards_update(story_id, card_id):
+    story = get_story(story_id)
+    q = {'_id': id, 'story_id': story['_id']}
+    card = obj_or_404(cards.find_one(q))
+    card = dict(request.json)
+    card.pop('_id', None)
+    card.pop('story_id', None)
+    cards.update(q, card)
+    up = {'$addToSet': {'cards': card['_id']}}
+    stories.update({'_id': story['_id']}, up)
+    return obj_or_404(cards.find_one(q))
+
 
