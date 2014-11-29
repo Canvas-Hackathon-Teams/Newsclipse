@@ -1,5 +1,6 @@
 import os
-
+PROJECT_NAME = 'Newsclipse'
+PROJECT_DESCRIPTION = 'You know, an IDE for news!'
 DEBUG = True
 ASSETS_DEBUG = True
 SECRET_KEY = os.environ.get('SECRET_KEY', 'banana pancakes')
