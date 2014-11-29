@@ -20,34 +20,192 @@
 
 // Components
 @import "../vendor/bootstrap/less/component-animations.less";
-// @import "../vendor/bootstrap/less/glyphicons.less";
-//@import "../vendor/bootstrap/less/dropdowns.less";
+@import "../vendor/bootstrap/less/glyphicons.less";
+@import "../vendor/bootstrap/less/dropdowns.less";
 @import "../vendor/bootstrap/less/button-groups.less";
 @import "../vendor/bootstrap/less/input-groups.less";
-//@import "../vendor/bootstrap/less/navs.less";
-//@import "../vendor/bootstrap/less/navbar.less";
+@import "../vendor/bootstrap/less/navs.less";
+@import "../vendor/bootstrap/less/navbar.less";
 @import "../vendor/bootstrap/less/breadcrumbs.less";
-//@import "../vendor/bootstrap/less/pagination.less";
+@import "../vendor/bootstrap/less/pagination.less";
 @import "../vendor/bootstrap/less/pager.less";
 @import "../vendor/bootstrap/less/labels.less";
 @import "../vendor/bootstrap/less/badges.less";
 @import "../vendor/bootstrap/less/jumbotron.less";
-// @import "../vendor/bootstrap/less/thumbnails.less";
+@import "../vendor/bootstrap/less/thumbnails.less";
 @import "../vendor/bootstrap/less/alerts.less";
-// @import "../vendor/bootstrap/less/progress-bars.less";
-//@import "../vendor/bootstrap/less/media.less";
+@import "../vendor/bootstrap/less/progress-bars.less";
+@import "../vendor/bootstrap/less/media.less";
 @import "../vendor/bootstrap/less/list-group.less";
 @import "../vendor/bootstrap/less/panels.less";
-// @import "../vendor/bootstrap/less/wells.less";
+@import "../vendor/bootstrap/less/wells.less";
 @import "../vendor/bootstrap/less/close.less";
 
 // Components w/ JavaScript
-// @import "../vendor/bootstrap/less/modals.less";
-// @import "../vendor/bootstrap/less/tooltip.less";
-// @import "../vendor/bootstrap/less/popovers.less";
-// @import "../vendor/bootstrap/less/carousel.less";
+@import "../vendor/bootstrap/less/modals.less";
+@import "../vendor/bootstrap/less/tooltip.less";
+@import "../vendor/bootstrap/less/popovers.less";
+@import "../vendor/bootstrap/less/carousel.less";
 
 // Utility classes
 @import "../vendor/bootstrap/less/utilities.less";
 @import "../vendor/bootstrap/less/responsive-utilities.less";
+
+/* ==========================================================================
+Globals & Mixins
+========================================================================== */
+.rounded-corners (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.box-shadow (@x: 0; @y: 0; @blur: 1px; @color: rgba(0,0,0,0.3)) {
+    -moz-box-shadow: @arguments;
+    -webkit-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
+/* ==========================================================================
+Variables
+========================================================================== */
+
+// Breakpoints
+
+//("all", 0px),
+//("small", 420px),
+//("medium", 640px),
+//("large", 960px),
+//("xlarge", 1200px)
+
+
+// Style tiles, Colours
+@white: #ffffff;
+
+// Style tiles, Fonts
+@fontDefault: "Lucida Grande", Verdana, sans-serif;
+@fontHeadersDefault: "franklin-gothic-urw-cond",sans-serif;
+@fontHeadersBlock: "futura-pt", Arial, sans-serif;
+
+/* ==========================================================================
+Global 
+========================================================================== */
+
+body {
+    font-family: @fontDefault;
+}
+
+/* ==========================================================================
+Type
+========================================================================== */
+
+h1, h2, h3, h4 {
+    font-family: @fontHeadersDefault; 
+}
+
+/* ==========================================================================
+Layout
+========================================================================== */
+body {
+    /* Move down content because we have a fixed navbar that is 50px tall */
+    padding-top: 50px;
+}
+
+/* ==========================================================================
+Modules 
+========================================================================== */
+
+// Module: Header navigation
+.navbar-inverse {
+    background-color: #E5E5E5;
+    border-color: #e5e5e5;
+}
+
+/* ==========================================================================
+Progressively enhance for larger screens 
+========================================================================== */
+
+@media screen and (min-width: 768px) { /* Adjust for large desktop */
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) { /* Adjust for standard desktop */
+
+}
+
+@media screen and (min-width:768px) and (max-width: 992px) { /* portrait tablets */ 
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    /* Put high-resolution display styles here */
+}
+
+/* ==========================================================================
+Print styles.
+Should be inlined to avoid required HTTP connection: h5bp.com/r
+========================================================================== */
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+a[href^="javascript:"]:after,
+a[href^="#"]:after {
+    content: "";
+}
+
+pre,
+blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+}
+
+thead {
+    display: table-header-group; /* h5bp.com/t */
+}
+
+tr,
+img {
+    page-break-inside: avoid;
+}
+
+img {
+    max-width: 100% !important;
+}
+
+p,
+h2,
+h3 {
+    orphans: 3;
+    widows: 3;
+}
+
+h2,
+h3 {
+    page-break-after: avoid;
+}
+}
 
