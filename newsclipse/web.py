@@ -1,8 +1,9 @@
 from flask import render_template, request
+from bson.objectid import ObjectId
 #from restpager import Pager
 
 from newsclipse.core import app
-from newsclipse.db import stories, get_story, cards
+from newsclipse.db import stories, get_story, cards, save_card
 from newsclipse.util import obj_or_404, jsonify
 from newsclipse.queue import extract, lookup
 
@@ -54,10 +55,7 @@ def cards_create(story_id):
     story = get_story(story_id)
     card = dict(request.json)
     card.pop('_id', None)
-    card['story_id'] = story['_id']
-    ret = cards.insert(card)
-    stories.update({'_id': story['_id']}, {'$addToSet': {'cards': ret}})
-    return jsonify(cards.find_one({'_id': ret}))
+    return jsonify(save_card(story, card))
 
 
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['GET'])
@@ -70,14 +68,10 @@ def cards_get(story_id, card_id):
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['POST', 'PUT'])
 def cards_update(story_id, card_id):
     story = get_story(story_id)
-    q = {'_id': id, 'story_id': story['_id']}
+    q = {'_id': ObjectId(card_id), 'story_id': story['_id']}
     card = obj_or_404(cards.find_one(q))
-    card = dict(request.json)
-    card.pop('_id', None)
-    card.pop('story_id', None)
-    cards.update(q, card)
-    up = {'$addToSet': {'cards': card['_id']}}
-    stories.update({'_id': story['_id']}, up)
-    return obj_or_404(cards.find_one(q))
+    data = dict(request.json)
+    data['_id'] = card['_id']
+    return jsonify(save_card(story, data))
 
 

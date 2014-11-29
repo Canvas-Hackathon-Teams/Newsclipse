@@ -1,13 +1,7 @@
 import requests
+#from pprint import pprint
 
 from newsclipse.core import calais_key
-
-
-TAGS = {
-    'entity': ['Person', 'Organization', 'Company'],
-    #'location': ['Country', 'Region', 'City', 'ProvinceOrState',
-    #             'Continent', 'NaturalFeature', 'Facility']
-}
 
 
 def extract_entities(text):
@@ -19,27 +13,13 @@ def extract_entities(text):
     }
     res = requests.post(URL, headers=headers,
                         data=text.encode('utf-8'))
-    result = res.json()
-    
-    sections = []
-    for k, v in result.items():
-        if '_type' not in v:
-            continue
-        
-        tag = None
-        for tag_, types in TAGS.items():
-            if v.get('_type') in types:
-                tag = tag_
+    data = res.json()
+    for k, v in data.items():
+        if v.get('_type') in ['Person', 'Organization', 'Company']:
+            yield {
+                'title': v.get('name'),
+                'offset': v.get('instances', [{}])[0].get('offset'),
+                'card': 'entity',
+                'type': v.get('_type')
+            }
 
-        if tag is None:
-            continue
-
-        for instance in v.get('instances'):
-            instance.update({
-                'label': v.get('name'),
-                'type': v.get('_type'),
-                'tag': tag
-            })
-            sections.append(instance)
-
-    print sections
