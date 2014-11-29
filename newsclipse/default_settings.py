@@ -8,6 +8,7 @@ WTF_CSRF_ENABLED = False
 MONGO_URL = os.environ.get('MONGOHQ_URL', 'mongodb://localhost:27017/newsclipse')
 
 OPENCORPORATES_TOKEN = os.environ.get('OPENCORPORATES_TOKEN')
+CALAIS_KEY = os.environ.get('CALAIS_KEY')
 
 CELERY_ALWAYS_EAGER = False
 CELERY_TASK_SERIALIZER = 'json'

@@ -6363,6 +6363,10 @@ Modules
   background-color: #E5E5E5;
   border-color: #e5e5e5;
 }
+footer {
+  height: 100px;
+  background-color: #E5E5E5;
+}
 /* ==========================================================================
 Progressively enhance for larger screens 
 ========================================================================== */

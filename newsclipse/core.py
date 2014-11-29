@@ -25,6 +25,10 @@ assets = Environment(app)
 mongo = MongoClient(app.config.get('MONGO_URL'))
 db = mongo[urlparse(app.config.get('MONGO_URL')).path[1:]]
 
+calais_key = app.config.get('CALAIS_KEY')
+if calais_key is None:
+    raise SystemError('Please set $CALAIS_KEY in the config or environment!')
+
 queue_name = 'newsclipse_q'
 app.config['CELERY_DEFAULT_QUEUE'] = queue_name
 app.config['CELERY_QUEUES'] = (

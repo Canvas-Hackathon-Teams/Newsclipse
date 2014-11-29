@@ -1,5 +1,4 @@
 window.App = {};
-console.log('this...');
 // Use the backbone.layoutmanager
 // turn it on for all views by default
 Backbone.Layout.configure({
@@ -12,14 +11,12 @@ Backbone.Layout.configure({
     // This method will check for prebuilt templates first and fall back to
     // loading in via AJAX.
     fetchTemplate: function(path) {
-        console.log('fetching...');
         // Check for a global JST object.  When you build your templates for
         // production, ensure they are all attached here.
         var JST = window.JST || {};
 
         // If the path exists in the object, use it instead of fetching remotely.
         if (JST[path]) {
-            console.log('JST');
             return JST[path];
         }
 
@@ -29,7 +26,6 @@ Backbone.Layout.configure({
 
         // Fetch via jQuery's GET.  The third argument specifies the dataType.
         $.get('/static/js/templates/' + path + '.jst', function(contents) {
-            console.log('templates');
             // Assuming you're using underscore templates, the compile step here is
             // `_.template`.
             done(_.template(contents));
@@ -63,7 +59,15 @@ App.HeaderView = Backbone.View.extend({
 });
 
 App.FooterView = Backbone.View.extend({
-    template: "footer"
+    template: "footer",
+    events: {
+    }
+});
+
+App.DefaultView = Backbone.View.extend({
+    template: "default",
+    events: {
+    }
 });
 
 // ===================================================================
@@ -76,7 +80,8 @@ App.Layout = new Backbone.Layout({
     el: "body",
     views: {
         "header": new App.HeaderView(),
-        "footer": new App.FooterView()
+        "footer": new App.FooterView(),
+        "content": new App.DefaultView()
     }
 });
 
