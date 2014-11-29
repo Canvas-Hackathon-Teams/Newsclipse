@@ -13,3 +13,7 @@ def extract(story_id):
 @app.task
 def lookup(story_id, entity_name, entity_type):
     pass
+
+    #Here you add code, don't forget
+    #A switch case with types (what types)
+    #that returns a list of different card objects
