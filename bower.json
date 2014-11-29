@@ -6,6 +6,8 @@
     "**/*.txt"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.1"
+    "bootstrap": "~3.3.1",
+    "backbone": "~1.1.2",
+    "modernizr": "~2.8.3"
   }
 }
