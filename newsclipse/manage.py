@@ -4,11 +4,9 @@ from flask.ext.assets import ManageAssets
 
 from newsclipse.core import assets
 from newsclipse.web import app
-from newsclipse.search import init_elasticsearch
-from newsclipse.search import reset_elasticsearch
+from newsclipse.db import reset_db
 
 log = logging.getLogger(__name__)
-init_elasticsearch()
 manager = Manager(app)
 manager.add_command("assets", ManageAssets(assets))
 
@@ -16,7 +14,7 @@ manager.add_command("assets", ManageAssets(assets))
 @manager.command
 def reset():
     """ Destroy the current database and create a new one. """
-    reset()
+    reset_db()
 
 if __name__ == "__main__":
     manager.run()

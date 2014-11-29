@@ -6,11 +6,12 @@ PyYAML==3.11
 WTForms==2.0.1
 lxml==3.4.0
 mistune==0.4.1
-pyelasticsearch==0.7.1
+pymongo==2.7.2
 requests==2.4.3
 simplejson==3.6.5
 timestring==1.6.1
 restpager==0.1
+celery==3.1.17
 python-slugify==0.1.0
 gunicorn
 psycopg2
