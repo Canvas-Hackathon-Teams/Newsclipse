@@ -3947,28 +3947,3 @@ button.close {
     display: none !important;
   }
 }
-header {
-  padding: 1em 0 2em 0;
-}
-.block {
-  padding: 1em 0 2em 0;
-}
-.block p {
-  font-family: 'Georgia', serif;
-  font-size: 1.3em;
-}
-.block p .location {
-  color: #999;
-}
-.block .meta {
-  padding: 0.4em;
-  background-color: #ed1c24;
-  color: #fff;
-}
-.block .meta a,
-.block .meta a:active {
-  color: #fff;
-}
-.block .meta .date {
-  float: right !important;
-}
