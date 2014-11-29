@@ -1,0 +1,11 @@
+{
+  "name": "newsclipse",
+  "version": "0.1.0",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1"
+  }
+}
