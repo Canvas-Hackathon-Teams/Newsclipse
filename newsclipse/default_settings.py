@@ -1,5 +1,16 @@
+import os
+
 DEBUG = True
 ASSETS_DEBUG = True
-SECRET_KEY = 'banana pancakes'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'banana pancakes')
 WTF_CSRF_ENABLED = False
-ELASTICSEARCH_URL = 'http://localhost:9200'
+MONGO_URL = os.environ.get('MONGOHQ_URL', 'mongodb://localhost:27017/newsclipse')
+
+OPENCORPORATES_TOKEN = os.environ.get('OPENCORPORATES_TOKEN')
+
+CELERY_ALWAYS_EAGER = False
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TIMEZONE = 'UTC'
+CELERY_BROKER_URL = os.environ.get('RABBITMQ_BIGWIG_URL',
+                                   'amqp://guest:guest@localhost:5672//')
