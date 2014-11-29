@@ -27,6 +27,9 @@ assets.register('css', Bundle('style/app.less',
                               filters='less',
                               output='assets/style.css'))
 
-assets.register('js', Bundle("js/app.js",
+assets.register('js', Bundle("vendor/underscore/underscore.js",
+                            "vendor/backbone/backbone.js",
+                            "vendor/modernizr/modernizr.js",
+                            "js/app.js",
                              #filters='uglifyjs',
                              output='assets/app.js'))
