@@ -3,6 +3,8 @@ from datetime import datetime, date
 from inspect import isgenerator
 
 from werkzeug.exceptions import NotFound
+from pymongo.cursor import Cursor
+from bson.objectid import ObjectId
 from flask import Response, request
 
 
@@ -17,13 +19,15 @@ class AppEncoder(simplejson.JSONEncoder):
     method by calling that method and serializing the result. """
 
     def default(self, obj):
-        if hasattr(obj, 'to_dict'):
-            return obj.to_dict()
-        elif isinstance(obj, datetime):
+        if isinstance(obj, datetime):
             return obj.isoformat() + 'Z'
         elif isinstance(obj, date):
             return obj.isoformat()
+        elif isinstance(obj, ObjectId):
+            return unicode(obj)
         elif isgenerator(obj):
+            return [o for o in obj]
+        elif isinstance(obj, Cursor):
             return [o for o in obj]
         elif isinstance(obj, set):
             return [o for o in obj]
