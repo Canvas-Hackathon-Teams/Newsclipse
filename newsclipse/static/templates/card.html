@@ -1,6 +1,6 @@
 <div class="card">
   <h2>
-    <small>{{card.type}}</small>
+    <span class="icon icon_{{card.type|lowercase}}">{{card.type}}</small>
     <span ng-show="viewMode()">{{card.title}}</span>
     <input ng-show="editMode()" ng-model="card.title">
   </h2>
