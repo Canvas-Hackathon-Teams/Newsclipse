@@ -1,7 +1,8 @@
 <div class="card">
   <h2>
     <small>{{card.type}}</small>
-    {{card.title}}
+    <span ng-show="viewMode()">{{card.title}}</span>
+    <input ng-show="editMode()" ng-model="card.title">
   </h2>
   <p>
     <strong>a.k.a.</strong>
@@ -9,8 +10,15 @@
       {{alias}}
     </span>
 
-  <p>Custom text: {{card.text}}</p>
-  <p>Wiki text: {{card.wiki_text}}</p>
+  <a ng-click="toggleMode()">toggle mode</a>
+
+  <div ng-show="viewMode()">
+    <p>Custom text: {{card.text}}</p>
+    <p>Wiki text: {{card.wiki_text}}</p>
+  </div>
+  <div ng-show="editMode()">
+    <textarea ng-model="card.text"></textarea>
+  </div>
 
   <h3>Evidence</h3>
   <div ng-repeat="evidence in card.evidences">

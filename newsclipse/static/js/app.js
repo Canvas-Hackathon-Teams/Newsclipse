@@ -60,7 +60,26 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
     },
     templateUrl: 'card.html',
     link: function (scope, element, attrs, model) {
-      //console.log('foo');
+      var url = '/api/stories/' + scope.story._id + '/cards/' + scope.card._id;
+      scope.mode = 'view';
+
+      scope.toggleMode = function() {
+        console.log(url);
+        if (scope.editMode()) {
+          $http.post(url, scope.card).then(function(res) {
+            scope.card = res.data;
+          });
+        }
+        scope.mode = scope.mode == 'view' ? 'edit' : 'view';
+      };
+
+      scope.editMode = function() {
+        return scope.mode == 'edit';
+      };
+
+      scope.viewMode = function() {
+        return scope.mode == 'view';
+      };
     }
   };
 }]);
@@ -75,7 +94,8 @@ nclipse.directive('nclipseNewCard', ['$http', function($http) {
     },
     templateUrl: 'card_new.html',
     link: function (scope, element, attrs, model) {
-      
+      scope.card = {'score': 100};
+
     }
   };
 }]);
