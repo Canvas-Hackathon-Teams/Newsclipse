@@ -64,7 +64,6 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
       scope.mode = 'view';
 
       scope.toggleMode = function() {
-        console.log(url);
         if (scope.editMode()) {
           $http.post(url, scope.card).then(function(res) {
             scope.card = res.data;
