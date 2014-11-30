@@ -54,6 +54,7 @@ assets.register('js', Bundle("vendor/jquery/dist/jquery.js",
                              "vendor/bootstrap/dist/js/bootstrap.js",
                              "js/util.js",
                              "js/app.js",
+                             "js/layout.js",
                              "js/router.js",
                              filters='uglifyjs',
                              output='assets/app.js'))
