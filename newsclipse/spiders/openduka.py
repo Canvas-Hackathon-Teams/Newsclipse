@@ -1,5 +1,5 @@
 import requests
-from pprint import pprint
+#from pprint import pprint
 
 from newsclipse.db import save_evidence
 from newsclipse.spiders.util import Spider, text_score
@@ -11,7 +11,6 @@ API_KEY = '86a6b32f398fe7b3e0a7e13c96b4f032'
 class OpenDuka(Spider):
 
     def make_evidence(self, card, id, score, type_, record):
-        #print record.keys()
         label = record.get('Citation',
                            record.get('title',
                                       record.get('Name')))
