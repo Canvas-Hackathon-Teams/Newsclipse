@@ -1,9 +1,7 @@
-
-from newspaper import Article
-
-from BeautifulSoup import BeautifulSoup
+#from BeautifulSoup import BeautifulSoup
 import re
 import urllib
+
 
 def get_related(entities):
     all_entities = []
@@ -25,6 +23,7 @@ def get_related(entities):
             all_titles.add(t)
 
     entities = set()
+
     def is_subset(title1, title2):
 
         count = 0
