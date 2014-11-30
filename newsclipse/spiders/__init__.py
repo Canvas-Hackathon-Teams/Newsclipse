@@ -2,11 +2,11 @@ import logging
 
 from newsclipse.spiders.openduka import OpenDuka
 from newsclipse.spiders.wiki import Wikipedia
+from newsclipse.spiders.opencorp import OpenCorporates
 from newsclipse.db import save_card
 
 log = logging.getLogger(__name__)
-SPIDERS = [OpenDuka,Wikipedia]
-
+SPIDERS = [OpenDuka, OpenCorporates,Wikipedia]
 
 def lookup(story, card):
     entity_type = card.get('type')
