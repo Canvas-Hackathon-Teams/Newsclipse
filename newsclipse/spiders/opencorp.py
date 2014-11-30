@@ -81,8 +81,11 @@ class OpenCorporates(Spider):
                 break
 
             corp_data = officer.get('company')
+            position = officer.get('position')
+            if not position:
+                position = 'an officer'
             citation = '%s is %s of %s' % (officer.get('name'),
-                                           corp_data.get('position'),
+                                           position,
                                            corp_data.get('name'))
             self.make_evidence(card, score, url, citation)
         return card
