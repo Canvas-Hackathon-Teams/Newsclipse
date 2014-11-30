@@ -14,4 +14,3 @@ restpager==0.1
 celery==3.1.17
 python-slugify==0.1.0
 gunicorn
-psycopg2

@@ -1,33 +1,34 @@
 import requests
-class Openduka:
-    """The Openduka lookup scripts."""
-    #We should hide this!
-    key = 12345
-    
-    def lookup(self,term):
-		key = '86a6b32f398fe7b3e0a7e13c96b4f032'
-		# payload = {'key': key, 'term': 'KENYA NATIONAL EXAMINATIONS COUNCIL'}
-		payload = {'key': key, 'term': term}
-		r = requests.get("http://www.openduka.org/index.php/api/search", params=payload)
-		ids = r.json()
-		# print ids
-		payload = {'key': key, 'id': ids[0]['ID']}
-		r = requests.get("http://www.openduka.org/index.php/api/entity", params=payload)
-		connections = r.json()
-		data = connections['data']
-		for typeSet in data:
-			print "new typeset!"
-			dataset_types= typeSet['dataset_type']
-			for types in dataset_types:
-				print types.keys()
-				print " "
-				# {
-				# "type":"evidence",
-				# "links":links
-				# "source":sourceLink
-				# }
-		# return a card object for every datatype, this card object should an evidence type format.
-		pass
 
-openduka = Openduka()
-openduka.lookup('KENYA NATIONAL EXAMINATIONS COUNCIL')
+def openDukaLookup(self,term):
+	#TODO: please export this as a env variable
+	key = '86a6b32f398fe7b3e0a7e13c96b4f032'
+	# payload = {'key': key, 'term': 'KENYA NATIONAL EXAMINATIONS COUNCIL'}
+	payload = {'key': key, 'term': term}
+	r = requests.get("http://www.openduka.org/index.php/api/search", params=payload)
+	ids = r.json()
+	print ids
+	entId = ids[0]['ID']
+	payload = {'key': key, 'id': entId}
+	r = requests.get("http://www.openduka.org/index.php/api/entity", params=payload)
+	connections = r.json()
+	data = connections['data']
+	returnLinks = []
+	for typeSet in data:
+		print "new typeset!"
+		dataset_types= typeSet['dataset_type']
+		for types in dataset_types:
+			print types.keys()
+			print " "
+			label = types.keys()[0]
+			descText = "Found %(amount)s of %(type)s type" %{"amount":str(len(label)), "type":label,}
+			link = "http://www.openduka.org/index.php/homes/tree/%s" % entId
+			returnLinks.extend({"text":descText,"link":link})
+			#return a array of objects
+			# return a card object for every datatype, this will be a part of a person or company card
+	return returnLinks
+		
+		
+
+# openduka = Openduka()
+# openduka.lookup('KENYA NATIONAL EXAMINATIONS COUNCIL')

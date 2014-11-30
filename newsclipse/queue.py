@@ -3,6 +3,7 @@ import logging
 from newsclipse.core import celery as app
 from newsclipse.extract import extract_entities
 from newsclipse.db import get_story, get_card, save_card
+from newsclipse.openduka import openDukaLookup
 
 log = logging.getLogger(__name__)
 
@@ -28,12 +29,17 @@ def lookup(story_id, card_id):
 
     if entity_type == "Person":
         #run which lookup services
+
+        #run trough OpenDuka
+        # openDukaLookup(personNAME!)
         pass
     elif entity_type == "Company":
         #run which lookup services
+        #run trough OpenDuka
         pass
     elif entity_type == "Organization":
         #run which lookup services
+        #run trough OpenDuka? probably not
         pass
     
     #title
