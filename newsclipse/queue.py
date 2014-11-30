@@ -14,27 +14,25 @@ def extract(story_id):
 	
 @app.task
 def lookup(story_id, entity_name, entity_type):
-	pass
 
 	#Here you add code, don't forget
 	#that returns a list of different card objects
-	switch(n) {
-		case "person":
+
+	if entity_type is "person":
 			#run which lookup services
-			break;
-		case "places":
+			pass
+	elif entity_type is "places":
 			#run which lookup services
-			break;
-		case "social tags":
+			pass
+	elif entity_type is "social tags":
 			#run which lookup services
-			break;
-		case "companies":
+			pass
+	elif entity_type is "companies":
 			#run which lookup services
-			break;
-		case "organisations":
+			pass
+	elif entity_type is "organisations":
 			#run which lookup services
-			break;
-	}
+			pass
 	
 	#title
 	#text

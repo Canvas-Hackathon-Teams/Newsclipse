@@ -1,10 +1,11 @@
+import requests
 class Openduka:
-    """A thing that does a thing."""
+    """The Openduka lookup scripts."""
     #We should hide this!
     key = 12345
     
-    def lookup(term):
-    	key = '86a6b32f398fe7b3e0a7e13c96b4f032'
+    def lookup(self,term):
+		key = '86a6b32f398fe7b3e0a7e13c96b4f032'
 		# payload = {'key': key, 'term': 'KENYA NATIONAL EXAMINATIONS COUNCIL'}
 		payload = {'key': key, 'term': term}
 		r = requests.get("http://www.openduka.org/index.php/api/search", params=payload)
@@ -20,5 +21,13 @@ class Openduka:
 			for types in dataset_types:
 				print types.keys()
 				print " "
+				# {
+				# "type":"evidence",
+				# "links":links
+				# "source":sourceLink
+				# }
 		# return a card object for every datatype, this card object should an evidence type format.
 		pass
+
+openduka = Openduka()
+openduka.lookup('KENYA NATIONAL EXAMINATIONS COUNCIL')
