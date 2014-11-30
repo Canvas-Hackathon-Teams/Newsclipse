@@ -7,7 +7,7 @@ from newsclipse.core import app
 from newsclipse.db import stories, get_story, cards
 from newsclipse.db import save_card, get_card
 from newsclipse.util import obj_or_404, jsonify
-from newsclipse.queue import extract, lookup
+from newsclipse.queue import extract
 
 
 @app.route('/')
