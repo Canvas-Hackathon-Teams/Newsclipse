@@ -32,6 +32,8 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
   $scope.storyId = $routeParams.id;
   $scope.story = {};
   $scope.cards = [];
+  $scope.activeCards = false;
+  $scope.discardedCards = false;
 
   $http.get('/api/stories/' + $scope.storyId).then(function(res) {
     $scope.story = res.data;
@@ -55,6 +57,16 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
           return a.updated_at.localeCompare(b.updated_at);
         }
         return a.offset - b.offset;
+      });
+      $scope.discardedCards = false;
+      $scope.activeCards = false;
+      angular.forEach(newCards, function(c) {
+        c.discarded = c.status == 'discarded';
+        if (c.discarded) {
+          $scope.discardedCards = true;
+        } else {
+          $scope.activeCards = true;
+        }
       });
       $scope.cards = newCards;
     });
