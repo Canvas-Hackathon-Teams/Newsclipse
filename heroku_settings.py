@@ -1,0 +1,12 @@
+import os
+
+DEBUG = False
+ASSETS_DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY')
+MONGO_URL = os.environ.get('MONGOHQ_URL')
+
+CELERY_ALWAYS_EAGER = False
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TIMEZONE = 'UTC'
+CELERY_BROKER_URL = os.environ.get('RABBITMQ_BIGWIG_URL')
