@@ -159,6 +159,14 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
         return scope.card.evidences.length > 0;
       };
 
+      scope.hasWiki = function() {
+        return scope.card.wiki_text.length > 0;
+      };
+
+      scope.hasCustom = function() {
+        return scope.card.text.length > 0;
+      };
+
       scope.hasAliases = function() {
         return scope.card.aliases.length > 1;
       };

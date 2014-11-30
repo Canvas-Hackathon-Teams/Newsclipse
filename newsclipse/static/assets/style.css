@@ -6348,6 +6348,7 @@ body {
 }
 #page {
   background-color: #ffffff;
+  padding-bottom: 2em;
 }
 h1,
 h2,
@@ -6376,6 +6377,22 @@ h4 {
   margin-top: -0.2em;
   margin-left: 0.2em;
 }
+.navbar-inverse .navbar-brand {
+  position: relative;
+}
+.navbar-inverse .navbar-brand .text {
+  display: inline-block;
+  margin-left: 5em;
+  letter-spacing: 0.2em;
+}
+.navbar-inverse .navbar-brand .text .boldish {
+  font-weight: 500;
+}
+.navbar-inverse .navbar-brand img {
+  position: absolute;
+  width: 3.5em;
+  z-index: 1000;
+}
 footer {
   min-height: 4em;
   color: #ffffff;
@@ -6385,11 +6402,19 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding-top: 1em;
-  margin-top: 1em;
   text-align: center;
 }
-.btn {
-  width: 100%;
+footer a {
+  color: #cccccc;
+}
+footer a:hover {
+  color: #999999;
+}
+.save-bar {
+  text-align: right;
+}
+.save-bar .btn {
+  width: 50%;
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -6402,6 +6427,7 @@ footer {
   text-shadow: 0px;
   box-shadow: 0px;
   padding: 5px 0;
+  margin-right: -15px;
 }
 .border_left {
   border-left: 1px solid #d7d7d7;
@@ -6495,28 +6521,31 @@ footer {
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding-top: 0.8em;
+  margin-top: 0.8em;
   cursor: pointer;
+}
+.card .card-title .count {
+  color: #bebebe;
 }
 .card .card-title:hover {
   color: #559dc0;
 }
 /* Nav Tabs aka a mess right now. */
-.card-list .nav-tabs {
+.card-tabs .nav-tabs {
   padding: 0 0 1em 0;
 }
-.card-list .nav-tabs.nav-justified > .active > a,
-.card-list .nav-tabs.nav-justified > .active > a:hover,
-.card-list .nav-tabs.nav-justified > .active > a:focus {
+.card-tabs .nav-tabs.nav-justified > .active > a,
+.card-tabs .nav-tabs.nav-justified > .active > a:hover,
+.card-tabs .nav-tabs.nav-justified > .active > a:focus {
   border: 0px;
   border-radius: 0px;
   background-color: #559dc0;
   color: #ffffff;
 }
-.card-list .nav-tabs.nav-justified > .active > a:hover {
+.card-tabs .nav-tabs.nav-justified > .active > a:hover {
   background: #e1e1e1;
 }
-.card-list .nav-tabs.nav-justified > li > a {
+.card-tabs .nav-tabs.nav-justified > li > a {
   border: 0px;
   border-radius: 0px;
   font-size: 1em;
@@ -6525,10 +6554,13 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-.card-list .nav > li > a {
+.card-tabs .nav > li > a {
   position: relative;
   display: block;
   padding: 5px 15px;
+}
+.card-list {
+  overflow-y: scroll;
 }
 .evidence_score {
   background-color: #aaa;
@@ -6564,6 +6596,10 @@ footer {
   font-size: 0.8em;
   height: 15px;
 }
+.editField {
+  width: 70%;
+  /*height:60px;*/
+}
 .sub_header {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
@@ -6572,4 +6608,8 @@ footer {
   letter-spacing: 0.1em;
   font-weight: 400;
   font-size: 1.2em;
+}
+.pseudo_link {
+  cursor: pointer;
+  margin-top: -5px;
 }

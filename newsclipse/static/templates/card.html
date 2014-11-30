@@ -24,30 +24,39 @@
           no leads
         </span>
       </div>
-      <input ng-show="editMode()" class="card-title" ng-model="card.title">
+      <input ng-show="editMode()" class="card-title card-title-edit" ng-model="card.title">
     </div>
     <div class="clearfix"></div>
   </div>
   <div class="card-body" ng-show="expanded">
-    <p ng-show="hasAliases()">
+   <!--  <p ng-show="hasAliases()">
       <strong>a.k.a.</strong>
       <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
         {{alias}}
       </span>
-    </p>
+    </p> -->
 
-    <a ng-click="toggleMode()">toggle mode</a>
+    <!-- <a ng-click="toggleMode()">toggle mode</a> -->
 
+    <div ng-hide="hasWiki()">
+    <h3 class="sub_header">Notes<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
     <div ng-show="viewMode()">
-      <h3 class="sub_header">Custom text</h3>
       <p>{{card.text}}</p>
-      
-      <h3 class="sub_header">Wiki text</h3>
+    </div>
+    <div ng-show="editMode()">
+      <textarea class="editField" ng-model="card.text"></textarea>
+    </div>
+  </div>
+
+    <div ng-show="hasWiki()">
+    <h3 class="sub_header">Wikipedia summary<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
+    <div ng-show="viewMode()">
       <p>{{card.wiki_text}}</p>
     </div>
     <div ng-show="editMode()">
-      <textarea ng-model="card.text"></textarea>
+      <textarea class="editField" ng-model="card.wiki_text"></textarea>
     </div>
+  </div>
 
     <div ng-show="hasEvidence()">
       <h3 class="sub_header">Evidence</h3>
