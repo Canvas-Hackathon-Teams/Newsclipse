@@ -14,6 +14,19 @@ App.FooterView = Backbone.View.extend({
     }
 });
 
+App.DefaultView = Backbone.View.extend({
+    template: "default",
+    initialize: function(options) {
+    },
+    beforeRender: function() {
+        //console.log('Adding child views...');
+        //this.insertView("#story", new App.StoryView() );
+        //this.insertView("#cards", new App.CardsView() );
+    },
+    events: {
+    }
+});
+
 // ===================================================================
 // Layouts
 // ===================================================================
@@ -26,3 +39,4 @@ App.Layout = new Backbone.Layout({
         "footer": new App.FooterView(),
     }
 });
+
