@@ -4,7 +4,7 @@ App.CardListItemView = Backbone.View.extend({
     initialize: function() {
         console.log('Card list item view initalized...');
         this.cardId = this.model.get('_id');
-        //console.log(this.model);
+        console.log(this.model);
     },
     template: "card-list-item",
     events: {
@@ -18,24 +18,33 @@ App.CardListItemView = Backbone.View.extend({
     }
 });
 
-//App.CardEditorView = Backbone.View.extend({
-    //collection: '',
-    //initialize: function(options) {
-        //console.log('Card editor view initalized...');
+App.CardEditorView = Backbone.View.extend({
+    collection: '',
+    storyId: '',
+    initialize: function(options) {
+        console.log('Card editor view initalized...');
         //this.collection = options.cards;
-    //},
-    //template: "card-editor",
-    //events: {
-    //},
-    //beforeRender: function() {
-        //// Add the subviews to the view
-        //this.collection.each(function(card) {
-            //this.insertView("#card-list", new App.CardListItemView({
-                //model: card
-            //}));
-        //}, this);
-    //}
-//});
+        this.storyId = options.storyId;
+        console.log(this.storyId);
+        this.collection = new App.StoryCardsCollection({ "storyId": this.storyId });
+        this.listenTo(this.collection, "add remove sync", this.render);
+        this.collection.fetch();
+    },
+     serialize: function() {
+       return { storyId: this.storyId };
+    },
+    template: "card-editor",
+    events: {
+    },
+    beforeRender: function() {
+        //Add the subviews to the view
+        this.collection.each(function(card) {
+            this.insertView("#card-list", new App.CardListItemView({
+                model: card
+            }));
+        }, this);
+    }
+});
 
 //App.CardsView = Backbone.View.extend({
     //initialize: function() {
