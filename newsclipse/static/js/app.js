@@ -48,6 +48,9 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
 
   $http.get('/api/stories/' + $scope.storyId).then(function(res) {
     $scope.story = res.data;
+    if (!$scope.story.text || !$scope.story.text.length) {
+      $scope.story.text = 'On December 1st, 2014...<br><br>'
+    }
   });
 
   $scope.$on('highlight', function(e, words) {
