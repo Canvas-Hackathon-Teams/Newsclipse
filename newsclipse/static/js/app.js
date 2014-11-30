@@ -35,7 +35,9 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$http',
   });
 
   $scope.saveStory = function () {
-    console.log('saving!');
+    $http.post('/api/stories/' + $scope.storyId, $scope.story).then(function(res) {
+      console.log('Saved!');
+    });
   };
 
 }]);
