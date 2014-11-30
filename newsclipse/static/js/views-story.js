@@ -49,25 +49,21 @@ App.StoryView = Backbone.View.extend({
     },
     template: "story-editor",
     events: {
+        "click #analyze": "runAnalyze"
+    },
+    runAnalyze: function() {
+        console.log('yo!');
+        //console.log(this);
+        this.model.set('text', $('#text').val());
+        console.log(this.model);
+        this.model.sync();
     },
     beforeRender: function() {
         // Add the subviews to the view
-        this.collection.each(function(story) {
-            this.insertView("#stories-list", new App.StoryListItemView({
-                model: story
-            }));
-        }, this);
+        //this.collection.each(function(story) {
+        //    this.insertView("#stories-list", new App.StoryListItemView({
+        //        model: story
+        //    }));
+        //}, this);
     },
-});
-
-App.StoryView = Backbone.View.extend({
-    initialize: function() {
-        console.log('Story view initalized...');
-    },
-    views: {
-        "#card-editor": new App.CardEditorView(),
-    },
-    template: "story-editor",
-    events: {
-    }
 });
