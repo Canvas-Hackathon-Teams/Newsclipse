@@ -4,6 +4,7 @@ from pymongo import ASCENDING
 #from restpager import Pager
 
 from newsclipse.core import app
+from newsclipse.db import reset_db
 from newsclipse.db import stories, get_story, cards
 from newsclipse.db import save_card, get_card
 from newsclipse.util import obj_or_404, jsonify, AppEncoder
@@ -15,6 +16,12 @@ def home():
     stories_ = stories.find()
     stories_ = AppEncoder().encode(stories_)
     return render_template("index.html", stories=stories_)
+
+
+@app.route('/api/nuke', methods=['POST', 'PUT'])
+def reset():
+    reset_db()
+    return jsonify({'status': 'ok', 'message': 'Nuked all the things'})
 
 
 @app.route('/api/stories', methods=['GET'])

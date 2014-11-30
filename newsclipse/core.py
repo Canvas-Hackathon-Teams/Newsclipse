@@ -22,6 +22,9 @@ app.config.from_object(default_settings)
 app.config.from_envvar('NEWSCLIPSE_SETTINGS', silent=True)
 
 assets = Environment(app)
+if app.config.get('PRODUCTION'):
+    assets.auto_build = False
+
 mongo = MongoClient(app.config.get('MONGO_URL'))
 db = mongo[urlparse(app.config.get('MONGO_URL')).path[1:]]
 
