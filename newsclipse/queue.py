@@ -10,8 +10,11 @@ log = logging.getLogger(__name__)
 @app.task
 def extract(story_id):
     story = get_story(story_id)
-    for card in extract_entities(story.get('text')):
-        save_card(story, card, key='title')
+    try:
+        for card in extract_entities(story.get('text')):
+            save_card(story, card, aliases=True)
+    except Exception, e:
+        print e
 
 
 @app.task

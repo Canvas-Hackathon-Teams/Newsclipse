@@ -24,25 +24,38 @@ def get_story(id):
 def get_card(story, id):
     if not isinstance(id, ObjectId):
         id = ObjectId(id)
-    q = {'_id': id, 'story_id': story['_id']}
+    q = {'_id': id, 'stories': story['_id']}
     return obj_or_404(cards.find_one(q))
 
 
-def save_card(story, card, key='_id'):
+def save_card(story, card, aliases=False):
     data = {
         'status': 'pending',
-        'story_id': story['_id'],
         'card': 'event',
+        'aliases': [card.get('title')],
+        'stories': [story['_id']],
         'created_at': datetime.utcnow(),
         'offset': 0,
     }
     data.update(card)
     data['updated_at'] = datetime.utcnow()
-    q = {key: data.get(key), 'story_id': story['_id']}
-    cards.update(q, {'$set': data}, upsert=True)
+    q = {'stories': story['_id']}
+    if aliases:
+        q['aliases'] = data.get('title')
+    else:
+        q['_id'] = data.get('_id')
+
+    old = cards.find_one(q)
+    if old is not None:
+        data['stories'] = set(old.get('stories') + [story['_id']])
+        data['aliases'] = set(old.get('aliases') + data.get('aliases'))
+        cards.update(q, {'$set': data})
+    else:
+        cards.insert(data)
+
     card = cards.find_one(q)
-    up = {'$addToSet': {'cards': card['_id']}}
-    stories.update({'_id': story['_id']}, up)
+    op = {'$addToSet': {'cards': card['_id']}}
+    stories.update({'_id': story['_id']}, op)
     
     from newsclipse.queue import lookup
     lookup.delay(unicode(story['_id']), unicode(card['_id']))

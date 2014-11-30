@@ -52,7 +52,7 @@ def stories_update(id):
 @app.route('/api/stories/<story_id>/cards', methods=['GET'])
 def cards_index(story_id):
     story = get_story(story_id)
-    cur = cards.find({'story_id': story['_id']})
+    cur = cards.find({'stories': story['_id']})
     cur = cur.sort('offset', ASCENDING)
     return jsonify(cur)
 

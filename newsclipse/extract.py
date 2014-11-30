@@ -15,12 +15,17 @@ def extract_entities(text):
                         data=text.encode('utf-8'))
     data = res.json()
     for k, v in data.items():
-        if v.get('_type') in ['Person', 'Organization', 'Company']:
+        _type = v.get('_type')
+        if _type in ['Person', 'Organization', 'Company']:
+            aliases = set([v.get('name')])
+            for instance in v.get('instances', [{}]):
+                alias = instance.get('exact')
+                if alias is not None and len(alias) > 3:
+                    aliases.add(alias)
             yield {
                 'title': v.get('name'),
+                'aliases': list(aliases),
                 'offset': v.get('instances', [{}])[0].get('offset'),
                 'card': 'entity',
-                'type': v.get('_type')
+                'type': _type
             }
-
-    print sections
