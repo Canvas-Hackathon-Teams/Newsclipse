@@ -17,7 +17,7 @@ def extract(story_id):
             if card['card'] == 'entity':
                 save_card(story, card, aliases=True)
     except Exception, e:
-        print e
+        log.exception(e)
 
 
 @app.task
@@ -27,7 +27,7 @@ def lookup(story_id, card_id):
         card = get_card(story, card_id)
         spiders.lookup(story, card)
     except Exception, e:
-        print e
+        log.exception(e)
 
 
 def get_related_stories(story_id):
@@ -36,4 +36,4 @@ def get_related_stories(story_id):
         entities = extract_entities(story.get('text'))
         return get_related(entities)
     except Exception, e:
-        print e
+        log.exception(e)
