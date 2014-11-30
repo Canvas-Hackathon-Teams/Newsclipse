@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="nclipse">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{config.PROJECT_DESCRIPTION}}</title>
         
         {% assets "css" %}
-        <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
+            <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
         {% endassets %}
     </head>
-    <body>
+    <body ng-controller="AppCtrl" ng-cloak>
         <header>
         </header>
 
         <div class="container">
-          <div id="content"></div>
+          <div ng-view></div>
         </div><!-- /.container -->
 
         <footer>
         </footer>
     </div>
     <script>var STORIES = {{stories | safe}};</script>
-    {% assets "tmpl" %}
-    <script src="{{ ASSET_URL }}"></script>
-    {% endassets %}
     {% assets "js" %}
-    <script src="{{ ASSET_URL }}"></script>
+        <script src="{{ ASSET_URL }}"></script>
     {% endassets %}
+
+    {% for path, tmpl in templates %}
+        <script id="{{path}}" type="text/ng-template">{{tmpl|safe}}</script>
+    {% endfor %}
 </body>
 </html>

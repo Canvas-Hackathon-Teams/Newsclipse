@@ -1,3 +1,4 @@
+import os
 from flask import render_template, request
 from datetime import datetime
 from pymongo import ASCENDING
@@ -12,11 +13,22 @@ from newsclipse.util import obj_or_404, jsonify, AppEncoder
 from newsclipse.queue import extract
 
 
+def angular_templates():
+    partials_dir = os.path.join(app.static_folder, 'templates')
+    for (root, dirs, files) in os.walk(partials_dir):
+        for file_name in files:
+            file_path = os.path.join(root, file_name)
+            with open(file_path, 'rb') as fh:
+                file_name = file_path[len(partials_dir) + 1:]
+                yield (file_name, fh.read().decode('utf-8'))
+
+
 @app.route('/')
 def home():
     stories_ = stories.find()
     stories_ = AppEncoder().encode(stories_)
-    return render_template("index.html", stories=stories_)
+    return render_template("index.html", stories=stories_,
+                           templates=angular_templates())
 
 
 @app.route('/api/nuke', methods=['POST', 'PUT'])
