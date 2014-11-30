@@ -52,7 +52,6 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
       });
       newCards = newCards.concat($scope.cards);
       newCards.sort(function(a, b) {
-        console.log(a.offset, b.offset);
         if (a.offset == b.offset) {
           return a.updated_at.localeCompare(b.updated_at);
         }
