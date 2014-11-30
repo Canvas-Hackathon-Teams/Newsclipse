@@ -42,10 +42,29 @@ Backbone.Layout.configure({
 // Models
 // ===================================================================
 
+App.Card = Backbone.Model.extend({ 
+
+});
+
+App.Story = Backbone.Model.extend({ 
+
+});
 
 // ===================================================================
 // Collections
 // ===================================================================
+
+App.StoriesCollection = Backbone.Collection.extend({
+    model: App.Story,
+    url: "/api/stories",
+    comparator: 'title'
+});
+
+App.CardsCollection = Backbone.Collection.extend({
+    model: App.Card,
+    //url: "/api/stories/id/cards",
+    comparator: 'title'
+});
 
 
 // ===================================================================
@@ -64,11 +83,37 @@ App.FooterView = Backbone.View.extend({
     }
 });
 
-App.DefaultView = Backbone.View.extend({
-    template: "default",
+App.StoryView = Backbone.View.extend({
+    template: "story-editor",
     events: {
     }
 });
+
+App.CardsView = Backbone.View.extend({
+    template: "card-editor",
+    events: {
+    }
+});
+
+App.DefaultView = Backbone.View.extend({
+    template: "default",
+    initialize: function(options) {
+        this.render();
+    },
+    //views: {
+        //"#story": new App.StoryView(),
+        //"#cards": new App.CardsView()
+    //},
+    beforeRender: function() {
+        this.insertView("#story", new App.StoryView() );
+        this.insertView("#cards", new App.CardsView() );
+    },
+    events: {
+    }
+});
+
+
+
 
 // ===================================================================
 // Layouts
@@ -81,7 +126,6 @@ App.Layout = new Backbone.Layout({
     views: {
         "header": new App.HeaderView(),
         "footer": new App.FooterView(),
-        "content": new App.DefaultView()
     }
 });
 
@@ -94,6 +138,7 @@ App.Router = Backbone.Router.extend({
         '*default': 'defaultRoute'
     },
     start: function() {
+        App.Layout.setView("#content", new App.DefaultView());
         App.Layout.render();
     }
 });
