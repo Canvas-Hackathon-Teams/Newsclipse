@@ -6744,3 +6744,23 @@ footer a:hover {
   cursor: pointer;
   margin-top: -5px;
 }
+#story-list .jumbotron {
+  background-color: #E0EEF4;
+  border-radius: 0px;
+}
+#story-list .jumbotron h2 {
+  font-family: 'Open Sans', sans-serif;
+}
+#story-list .jumbotron p {
+  font-size: 18px;
+}
+#story-list .logotype {
+  text-transform: uppercase;
+}
+#story-list .btn {
+  border-radius: 0px;
+}
+#story-list td.summary,
+#story-list td.cards {
+  color: #B3B3B3;
+}

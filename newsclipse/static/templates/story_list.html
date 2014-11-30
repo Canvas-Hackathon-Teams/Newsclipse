@@ -1,7 +1,34 @@
-<ul>
-  <li ng-repeat="story in stories">
-    <a href="#/stories/{{story._id}}">{{story.title}}</a>
-  </li>
-</ul>
-
-<input ng-click="newStory()" type="submit" value="New">
+<div id="story-list">
+    <div class="row">
+        <div class="col-md-12 border_left border_right">
+            <div class="jumbotron">
+                    <h2>Your digital research assistant</h2>
+                <p>
+                    <span class="logotype"><strong>News</strong>clip.se</span> automates the discovery of background information by searching a variety of data sources for the subjects in your story. Use it to organize your workflow and make research more efficient and shareable in your newsroom.
+                </p>
+                <p><a class="btn btn-primary btn-lg" href="#" ng-click="newStory()" role="button">Start a new story &raquo;</a></p>
+            </div>
+            <table class="table table-striped table-hover">
+                <caption>Your stories in progress:</caption>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Summary</th>
+                        <th>Cards</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="story in stories">
+                    <td>
+                        <a href="#/stories/{{story._id}}">{{story.title}}</a>
+                    </td>
+                    <td class="summary">
+                        Five top officials of the national examinations body received Sh1.1 million in bribes
+                    </td>
+                    <td class="cards">
+                        30
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
