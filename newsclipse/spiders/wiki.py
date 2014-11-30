@@ -1,9 +1,10 @@
-import requests
+import logging
 import wikipedia
 
+from newsclipse.spiders.util import Spider
 
-from newsclipse.db import save_evidence
-from newsclipse.spiders.util import Spider, text_score
+
+log = logging.getLogger(__name__)
 
 
 class Wikipedia(Spider):
@@ -14,8 +15,8 @@ class Wikipedia(Spider):
             #TODO: errors are still shown, So try is not the way
             text = wikipedia.summary(card.get('title'))
             #Add wiki text to card
-            card['wikiText'] = text
-        except ValueError:
-            pass
+            card['wiki_text'] = text
+        except wikipedia.WikipediaException, pe:
+            log.exception(pe)
 
         return card
