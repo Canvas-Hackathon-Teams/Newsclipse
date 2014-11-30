@@ -50,7 +50,6 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$http',
 
 }]);
 
-
 nclipse.directive('nclipseCard', ['$http', function($http) {
   return {
     restrict: 'E',
@@ -61,7 +60,22 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
     },
     templateUrl: 'card.html',
     link: function (scope, element, attrs, model) {
-      console.log('foo');
+      //console.log('foo');
+    }
+  };
+}]);
+
+
+nclipse.directive('nclipseNewCard', ['$http', function($http) {
+  return {
+    restrict: 'E',
+    transclude: true,
+    scope: {
+      'story': '='
+    },
+    templateUrl: 'card_new.html',
+    link: function (scope, element, attrs, model) {
+      
     }
   };
 }]);

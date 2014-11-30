@@ -1,10 +1,16 @@
-<input ng-model="story.title" placeholder="15 People involved in corruption (you won't believe number seven)!">
-<p>
-  <textarea ng-model="story.text" placeholder="On April 15, in the early hours of the morning..."></textarea>
-</p>
-<input type="submit" ng-click="saveStory()" value="Analyze">
+<div class="row">
+  <div class="col-md-4">
+    <input ng-model="story.title" placeholder="15 People involved in corruption (you won't believe number seven)!">
+    <p>
+      <textarea ng-model="story.text" placeholder="On April 15, in the early hours of the morning..."></textarea>
+    </p>
+    <input type="submit" ng-click="saveStory()" value="Analyze">
+  </div>
+  <div class="col-md-8">
+    <nclipse-new-card story="story"></nclipse-new-card>
 
-<div ng-repeat="card in cards">
-  <nclipse-card story="story" card="card"></nclipse-card>
+    <div ng-repeat="card in cards">
+      <nclipse-card story="story" card="card"></nclipse-card>
+    </div>
+  </div>
 </div>
-
