@@ -19,13 +19,13 @@
                 </thead>
                 <tr ng-repeat="story in stories">
                     <td>
-                        <a href="#/stories/{{story._id}}">{{story.title}}</a>
+                        <a href="#/stories/{{story._id}}">{{story.title}} </a>
                     </td>
                     <td class="summary">
                         Five top officials of the national examinations body received Sh1.1 million in bribes
                     </td>
                     <td class="cards">
-                        30
+                        {{ story.cards.length }}
                     </td>
                 </tr>
             </table>
