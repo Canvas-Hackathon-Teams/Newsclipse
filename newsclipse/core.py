@@ -49,6 +49,8 @@ assets.register('css', Bundle('style/app.less',
 assets.register('js', Bundle("vendor/angular/angular.js",
                              "vendor/angular-route/angular-route.js",
                              "vendor/angular-animate/angular-animate.js",
+                             "vendor/angular-bootstrap/ui-bootstrap.js",
+                             "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
                              "js/app.js",
                              filters='uglifyjs',
                              output='assets/app.js'))
