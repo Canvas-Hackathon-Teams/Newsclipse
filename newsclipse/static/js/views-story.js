@@ -55,8 +55,8 @@ App.StoryView = Backbone.View.extend({
         console.log('yo!');
         //console.log(this);
         this.model.set('text', $('#text').val());
-        console.log(this.model);
-        this.model.sync();
+        //console.log(this.model);
+        this.model.save();
     },
     beforeRender: function() {
         // Add the subviews to the view
