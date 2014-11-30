@@ -1,3 +1,130 @@
+/*! 
+ * angular-loading-bar v0.6.0
+ * https://chieffancypants.github.io/angular-loading-bar
+ * Copyright (c) 2014 Wes Cruver
+ * License: MIT
+ */
+/* Make clicks pass-through */
+#loading-bar,
+#loading-bar-spinner {
+  pointer-events: none;
+  -webkit-pointer-events: none;
+  -webkit-transition: 350ms linear all;
+  -moz-transition: 350ms linear all;
+  -o-transition: 350ms linear all;
+  transition: 350ms linear all;
+}
+#loading-bar.ng-enter,
+#loading-bar.ng-leave.ng-leave-active,
+#loading-bar-spinner.ng-enter,
+#loading-bar-spinner.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+#loading-bar.ng-enter.ng-enter-active,
+#loading-bar.ng-leave,
+#loading-bar-spinner.ng-enter.ng-enter-active,
+#loading-bar-spinner.ng-leave {
+  opacity: 1;
+}
+#loading-bar .bar {
+  -webkit-transition: width 350ms;
+  -moz-transition: width 350ms;
+  -o-transition: width 350ms;
+  transition: width 350ms;
+  background: #d62323;
+  position: fixed;
+  z-index: 10002;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-bottom-right-radius: 1px;
+  border-top-right-radius: 1px;
+}
+/* Fancy blur effect */
+#loading-bar .peg {
+  position: absolute;
+  width: 70px;
+  right: 0;
+  top: 0;
+  height: 2px;
+  opacity: .45;
+  -moz-box-shadow: #d62323 1px 0 6px 1px;
+  -ms-box-shadow: #d62323 1px 0 6px 1px;
+  -webkit-box-shadow: #d62323 1px 0 6px 1px;
+  box-shadow: #d62323 1px 0 6px 1px;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+#loading-bar-spinner {
+  display: block;
+  position: fixed;
+  z-index: 10002;
+  top: 10px;
+  left: 10px;
+}
+#loading-bar-spinner .spinner-icon {
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: #d62323;
+  border-left-color: #d62323;
+  border-radius: 10px;
+  -webkit-animation: loading-bar-spinner 400ms linear infinite;
+  -moz-animation: loading-bar-spinner 400ms linear infinite;
+  -ms-animation: loading-bar-spinner 400ms linear infinite;
+  -o-animation: loading-bar-spinner 400ms linear infinite;
+  animation: loading-bar-spinner 400ms linear infinite;
+}
+@-webkit-keyframes loading-bar-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes loading-bar-spinner {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loading-bar-spinner {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-ms-keyframes loading-bar-spinner {
+  0% {
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-bar-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -6357,6 +6484,7 @@ h4 {
   font-family: 'Lora', serif;
 }
 .navbar-inverse {
+  border-radius: 0;
   background-color: #555555;
   border: 0;
   color: #ffffff;
@@ -6448,15 +6576,16 @@ footer a:hover {
   width: 100%;
   letter-spacing: 0.05em;
   font-family: "Garamond", serif;
-  font-size: 1.5em;
+  font-size: 2em;
   border: 0px;
-  padding: 10px 8px;
+  padding: 11px 8px;
 }
 .input_text {
   border: 0px;
   padding: 15px 0 0 13px;
   width: 100%;
   height: 100%;
+  line-height: 1.7em;
 }
 /*Right Side*/
 .tablabel {
@@ -6530,6 +6659,10 @@ footer a:hover {
 .card .card-title:hover {
   color: #559dc0;
 }
+.card ul {
+  padding-left: 1.3em;
+  list-style-type: square;
+}
 /* Nav Tabs aka a mess right now. */
 .card-tabs .nav-tabs {
   padding: 0 0 1em 0;
@@ -6562,30 +6695,28 @@ footer a:hover {
 .card-list {
   overflow-y: scroll;
 }
-.evidence_score {
-  background-color: #aaa;
-  color: #ffffff;
-  padding: 2px;
-}
 .inline_block {
   display: inline-block;
 }
-.evidence_item {
-  margin: 2px 0px;
+.evidence {
+  margin: 2px 0px 7px;
 }
-.evidence_title {
+.evidence .citation {
   font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  display: inline-block;
-  overflow: hidden;
-  height: 13px;
-  max-width: 50%;
   text-overflow: ellipsis;
-  font-weight: 400;
-  font-size: 0.9em;
+}
+.evidence .source {
+  display: block;
+  font-size: 0.8em;
+  color: #999;
+}
+.evidence .source a {
+  color: #999;
+  text-decoration: underline;
 }
 .evidence_source {
   font-size: 1em;
@@ -6598,7 +6729,7 @@ footer a:hover {
 }
 .editField {
   width: 70%;
-  /*height:60px;*/
+  height: 100px;
 }
 .sub_header {
   font-size: 1em;
