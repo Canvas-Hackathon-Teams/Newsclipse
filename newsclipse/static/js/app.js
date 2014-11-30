@@ -160,7 +160,11 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
       };
 
       scope.hasWiki = function() {
-        return scope.card.wiki_text.length > 0;
+        if(scope.card.wiki_text != undefined){
+          return scope.card.wiki_text.length > 0;
+        }else{
+          return false;
+        }
       };
 
       scope.hasCustom = function() {
@@ -202,7 +206,7 @@ nclipse.directive('nclipseEvidence', ['$http', function($http) {
     },
     templateUrl: 'evidence.html',
     link: function (scope, element, attrs, model) {
-      console.log('foo');
+      
     }
   };
 }]);

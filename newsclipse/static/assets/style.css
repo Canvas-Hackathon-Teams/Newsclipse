@@ -6659,6 +6659,12 @@ footer a:hover {
 .card .card-title:hover {
   color: #559dc0;
 }
+<<<<<<< HEAD
+=======
+.card .card-title-edit {
+  width: 70%;
+}
+>>>>>>> some small clean up in hasWiki and a lost console.log also started on new card
 .card ul {
   padding-left: 1.3em;
   list-style-type: square;
@@ -6728,7 +6734,7 @@ footer a:hover {
   height: 15px;
 }
 .editField {
-  width: 70%;
+  width: 78%;
   height: 100px;
 }
 .sub_header {
@@ -6743,6 +6749,7 @@ footer a:hover {
 .pseudo_link {
   cursor: pointer;
   margin-top: -5px;
+  margin-left: 5px;
 }
 #story-list .jumbotron {
   background-color: #E0EEF4;
