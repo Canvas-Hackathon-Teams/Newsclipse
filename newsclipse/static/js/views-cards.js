@@ -4,6 +4,7 @@ App.CardListItemView = Backbone.View.extend({
     initialize: function() {
         console.log('Card list item view initalized...');
         this.cardId = this.model.get('_id');
+        //console.log(this.model);
     },
     template: "card-list-item",
     events: {
@@ -17,31 +18,31 @@ App.CardListItemView = Backbone.View.extend({
     }
 });
 
-App.CardEditorView = Backbone.View.extend({
-    collection: '',
-    initialize: function(options) {
-        console.log('Card editor view initalized...');
-        this.collection = options.cards;
-    },
-    template: "card-editor",
-    events: {
-    },
-    beforeRender: function() {
-        // Add the subviews to the view
-        this.collection.each(function(card) {
-            this.insertView("#card-list", new App.CardListItemView({
-                model: card
-            }));
-        }, this);
-    }
-});
+//App.CardEditorView = Backbone.View.extend({
+    //collection: '',
+    //initialize: function(options) {
+        //console.log('Card editor view initalized...');
+        //this.collection = options.cards;
+    //},
+    //template: "card-editor",
+    //events: {
+    //},
+    //beforeRender: function() {
+        //// Add the subviews to the view
+        //this.collection.each(function(card) {
+            //this.insertView("#card-list", new App.CardListItemView({
+                //model: card
+            //}));
+        //}, this);
+    //}
+//});
 
-App.CardsView = Backbone.View.extend({
-    initialize: function() {
-        console.log('Cards view initialized...');
-    },
-    template: "card-editor",
-    events: {
-    }
-});
+//App.CardsView = Backbone.View.extend({
+    //initialize: function() {
+        //console.log('Cards view initialized...');
+    //},
+    //template: "card-editor",
+    //events: {
+    //}
+//});
 

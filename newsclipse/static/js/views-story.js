@@ -41,8 +41,13 @@ App.StoryListView = Backbone.View.extend({
 });
 
 App.StoryView = Backbone.View.extend({
+    collection: '',
     initialize: function() {
         console.log('Story view initalized...');
+        this.collection = new App.StoryCardsCollection({ "storyId": this.model.get('_id') });
+        // Listen to events on the collection
+        this.listenTo(this.collection, "add remove sync", this.render);
+        this.collection.fetch();
     },
     views: {
         //"#card-editor": new App.CardEditorView(),
@@ -60,10 +65,14 @@ App.StoryView = Backbone.View.extend({
     },
     beforeRender: function() {
         // Add the subviews to the view
-        //this.collection.each(function(story) {
-        //    this.insertView("#stories-list", new App.StoryListItemView({
-        //        model: story
-        //    }));
-        //}, this);
+        this.collection.each(function(card) {
+            //console.log(card);
+           this.insertView("#card-list", new App.CardListItemView({
+               model: card
+           }));
+        }, this);
     },
+    afterRender: function() {
+        //console.log(this.collection);
+    }
 });
