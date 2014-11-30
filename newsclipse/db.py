@@ -20,6 +20,13 @@ def get_story(id):
     return obj_or_404(stories.find_one({'_id': id}))
 
 
+def get_card(story, id):
+    if not isinstance(id, ObjectId):
+        id = ObjectId(id)
+    q = {'_id': id, 'story_id': story['_id']}
+    return obj_or_404(cards.find_one(q))
+
+
 def save_card(story, card, key='_id'):
     data = {
         'status': 'pending',

@@ -3,7 +3,8 @@ from bson.objectid import ObjectId
 #from restpager import Pager
 
 from newsclipse.core import app
-from newsclipse.db import stories, get_story, cards, save_card
+from newsclipse.db import stories, get_story, cards
+from newsclipse.db import save_card, get_card
 from newsclipse.util import obj_or_404, jsonify
 from newsclipse.queue import extract, lookup
 
@@ -61,15 +62,13 @@ def cards_create(story_id):
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['GET'])
 def cards_get(story_id, card_id):
     story = get_story(story_id)
-    q = {'_id': id, 'story_id': story['_id']}
-    return obj_or_404(cards.find_one(q))
+    return obj_or_404(get_card(story, card_id))
 
 
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['POST', 'PUT'])
 def cards_update(story_id, card_id):
     story = get_story(story_id)
-    q = {'_id': ObjectId(card_id), 'story_id': story['_id']}
-    card = obj_or_404(cards.find_one(q))
+    card = obj_or_404(get_card(story, card_id))
     data = dict(request.json)
     data['_id'] = card['_id']
     return jsonify(save_card(story, data))

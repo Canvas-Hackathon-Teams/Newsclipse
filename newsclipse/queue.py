@@ -2,7 +2,7 @@ import logging
 
 from newsclipse.core import celery as app
 from newsclipse.extract import extract_entities
-from newsclipse.db import get_story, save_card
+from newsclipse.db import get_story, get_card, save_card
 
 log = logging.getLogger(__name__)
 
@@ -13,35 +13,32 @@ def extract(story_id):
     for card in extract_entities(story.get('text')):
         save_card(story, card, key='title')
 
-<<<<<<< HEAD
-	
-@app.task
-def lookup(story_id, entity_name, entity_type):
-=======
 
 def lookup(story_id, card_id):
->>>>>>> db4f9374cf91247bad0fb867ef2aa7ecd588863d
+    story = get_story(story_id)
+    card = get_card(story, card_id)
+    entity_type = card.get('type')
+    
+    #Here you add code, don't forget
+    #that returns a list of different card objects
 
-	#Here you add code, don't forget
-	#that returns a list of different card objects
-
-	if entity_type is "person":
-			#run which lookup services
-			pass
-	elif entity_type is "places":
-			#run which lookup services
-			pass
-	elif entity_type is "social tags":
-			#run which lookup services
-			pass
-	elif entity_type is "companies":
-			#run which lookup services
-			pass
-	elif entity_type is "organisations":
-			#run which lookup services
-			pass
-	
-	#title
-	#text
-	#picture (in case of person)
-	#
+    if entity_type == "person":
+        #run which lookup services
+        pass
+    elif entity_type == "places":
+        #run which lookup services
+        pass
+    elif entity_type == "social tags":
+        #run which lookup services
+        pass
+    elif entity_type == "companies":
+        #run which lookup services
+        pass
+    elif entity_type == "organisations":
+        #run which lookup services
+        pass
+    
+    #title
+    #text
+    #picture (in case of person)
+    #
