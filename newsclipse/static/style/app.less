@@ -77,9 +77,9 @@ Variables
 @bgColor: #555;
 
 // Style tiles, Fonts
-@fontDefault: "ProximaNova-Regular", Verdana, sans-serif;
+@fontDefault: 'Open Sans', sans-serif;
 @fontHeadersDefault: 'Lora', serif;
-@fontHeadersBlock: "futura-pt", Arial, sans-serif;
+@fontHeadersBlock: 'Lora', serif;
 
 
 body {
@@ -247,7 +247,9 @@ footer {
     }
 }
 
-.card_title {
+.card_title{
+    font-family: @fontDefault;
+    font-weight: 300;
     height:30px;
     padding:5px;
 }

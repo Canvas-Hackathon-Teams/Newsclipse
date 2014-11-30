@@ -6338,7 +6338,7 @@ Variables
 Global 
 ========================================================================== */
 body {
-  font-family: "ProximaNova-Regular", Verdana, sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 /* ==========================================================================
 Type
@@ -6355,7 +6355,7 @@ Layout
 body {
   /* Move down content because we have a fixed navbar that is 50px tall */
   font: 1.0em;
-  background-color: #828282;
+  background-color: #555555;
 }
 #page {
   background-color: #ffffff;
@@ -6364,7 +6364,7 @@ body {
 Modules 
 ========================================================================== */
 .navbar-inverse {
-  background-color: #828282;
+  background-color: #555555;
   border: 0;
   color: #ffffff;
   margin-bottom: 1em;
@@ -6497,6 +6497,8 @@ Building up the page, will repair this later
   background-position: 2px 0;
 }
 .card_title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   height: 30px;
   padding: 5px;
 }
