@@ -14,6 +14,7 @@ def extract(story_id):
         save_card(story, card, key='title')
 
 
+@app.task
 def lookup(story_id, card_id):
     story = get_story(story_id)
     card = get_card(story, card_id)

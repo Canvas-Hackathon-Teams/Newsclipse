@@ -1,5 +1,5 @@
 from flask import render_template, request
-from bson.objectid import ObjectId
+from pymongo import ASCENDING
 #from restpager import Pager
 
 from newsclipse.core import app
@@ -48,7 +48,9 @@ def stories_update(id):
 @app.route('/api/stories/<story_id>/cards', methods=['GET'])
 def cards_index(story_id):
     story = get_story(story_id)
-    return jsonify(cards.find({'story_id': story['_id']}))
+    cur = cards.find({'story_id': story['_id']})
+    cur = cur.sort('offset', ASCENDING)
+    return jsonify(cur)
 
 
 @app.route('/api/stories/<story_id>/cards', methods=['POST', 'PUT'])
