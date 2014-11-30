@@ -22,6 +22,9 @@ app.config.from_object(default_settings)
 app.config.from_envvar('NEWSCLIPSE_SETTINGS', silent=True)
 
 assets = Environment(app)
+if app.config.get('PRODUCTION'):
+    assets.auto_build = False
+
 mongo = MongoClient(app.config.get('MONGO_URL'))
 db = mongo[urlparse(app.config.get('MONGO_URL')).path[1:]]
 
@@ -44,15 +47,21 @@ assets.register('css', Bundle('style/app.less',
                               output='assets/style.css'))
 
 assets.register('js', Bundle("vendor/jquery/dist/jquery.js",
-                            "vendor/underscore/underscore.js",
-                            "vendor/backbone/backbone.js",
-                            "vendor/layoutmanager/backbone.layoutmanager.js",
-                            "vendor/modernizr/modernizr.js",
-                            "vendor/bootstrap/dist/js/bootstrap.js",
-                            "js/app.js",
-                             #filters='uglifyjs',
+                             "vendor/underscore/underscore.js",
+                             "vendor/backbone/backbone.js",
+                             "vendor/layoutmanager/backbone.layoutmanager.js",
+                             "vendor/modernizr/modernizr.js",
+                             "vendor/bootstrap/dist/js/bootstrap.js",
+                             "js/util.js",
+                             "js/model.js",
+                             "js/collections.js",
+                             "js/views-cards.js",
+                             "js/views-story.js",
+                             "js/layout.js",
+                             "js/router.js",
+                             filters='uglifyjs',
                              output='assets/app.js'))
 
 assets.register('tmpl', Bundle("js/templates/test.jst",
-                             filters='jst',
-                             output='assets/templates.js'))
+                               filters='jst',
+                               output='assets/templates.js'))

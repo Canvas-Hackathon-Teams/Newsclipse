@@ -1,8 +1,11 @@
 import os
 PROJECT_NAME = 'Newsclipse'
 PROJECT_DESCRIPTION = 'You know, an IDE for news!'
-DEBUG = True
-ASSETS_DEBUG = True
+
+PRODUCTION = os.environ.get('PRODUCTION') == 'TRUE'
+DEBUG = not PRODUCTION
+ASSETS_DEBUG = DEBUG
+
 SECRET_KEY = os.environ.get('SECRET_KEY', 'banana pancakes')
 WTF_CSRF_ENABLED = False
 MONGO_URL = os.environ.get('MONGOHQ_URL', 'mongodb://localhost:27017/newsclipse')
