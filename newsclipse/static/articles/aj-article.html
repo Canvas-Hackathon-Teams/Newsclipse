@@ -43,7 +43,9 @@
 <script src="/Scripts/Common.js?a=1" type="text/javascript"></script>
 <script src="/Scripts/SiteScripts.js?i=6" type="text/javascript"></script>
 <script src="/Scripts/ajax.js?a=2" type="text/javascript"></script>
-<script src="/Scripts/jquery-1.7.1.min.js?i=2" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.js" type="text/javascript"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/Scripts/AddthisSettings.js?a=1" type="text/javascript"></script>
 <script src="/Scripts/BCVideos.js?a=41" type="text/javascript"></script>
 <script src="http://admin.brightcove.com/js/BrightcoveExperiences.js" type="text/javascript"></script>
@@ -61,6 +63,13 @@
 <link href="/Styles/ticker-style.css?a=2" rel="stylesheet" type="text/css" /> 
 <script src="/Scripts/jquery.ticker.js" type="text/javascript" ></script>
 
+<style>
+    a[data-toggle="popover"] {
+        color: #000000;
+        background: url('http://127.0.0.1:5000/static/articles/magnify.png') no-repeat 3px #ff9b37;
+        padding: 2px 4px 2px 20px;
+    }
+</style>
 
 
 
@@ -102,6 +111,7 @@
 <div class="qodLinker">
 <script type="text/javascript">
         $(document).ready(function () {
+        $('[data-toggle="popover"]').popover()
             var qodSimple = 'false';
 
             $('.qod-simple').css('display', qodSimple.match("true") ? 'block' : 'none');
@@ -379,7 +389,7 @@
         <tr>
             <td>
                 <div id="ctl00_cphBody_dvArticleInfoBlock">
-                    <h2 id="ctl00_cphBody_dvSummary" class="articleSumm">Knec officials are said to have received kickbacks of over Sh1 million from an agent of Smith & Ozman.</h2>
+                    <p id="ctl00_cphBody_dvSummary" class="articleSumm">KNEC officials are said to have received kickbacks of over Sh1 million from an agent of Smith & Ozman.</p>
                     <div class="Tmp_hSpace5">
                         <!-- -->
                     </div>
@@ -398,7 +408,7 @@
             </td>
 		<td valign="top">
                 <div id="dvAuthorInfo">
-                    <div id="ctl00_cphBody_AuthorDataCtrl1_authorName" class="author-name"><a rel="author" href="/indepth/opinion/profile/tolu-ogunlesi.html">John Njagi</a></div>
+                    <div id="ctl00_cphBody_AuthorDataCtrl1_authorName" class="author-name">John Njagi</div>
                     <div id="ctl00_cphBody_AuthorDataCtrl1_authorTwitter" class="author-social-profiles">
                     </div>
                     <br />
@@ -450,18 +460,19 @@
         </tr>
         <tr>
             <td id="ctl00_cphBody_tdTextContent" class="DetailedSummary">
-            
+                <p>&nbsp;</p>
             <p>Five top officials of the national examinations body received Sh1.1 million in bribes from a UK company involved in the printing of certificates in Kenya, a London court heard on Tuesday.
             </p>
             <p>
-According to court papers produced in court, Kenya National Examinations Council (Knec) officials are said to have received kickbacks of over Sh1 million from an agent of Smith & Ozman, a UK company that was seeking to win back the lucrative tender.
+
+                According to court papers produced in court, <a data-container="body" title="Kenya National Examination Council" data-toggle="popover" data-placement="bottom" data-content="Kenya National Examination Council (KNEC) is the national body responsible for overseeing national examination in Kenya.">Kenya National Examinations Council (KNEC)</a> officials are said to have received kickbacks of over Sh1 million from an agent of Smith & Ozman, a UK company that was seeking to win back the lucrative tender.
             </p>
             <p>
 Its directors, Christopher and Nicholas Smith, are said to have used their agent in the country, Mr Trevy Oyombra, to bribe the officials to win back the tender, which had allegedly been given to another company.
 
             </p>
             <p>
-One of the directors, Christopher Smith, used his relationship with Knec computer manager Ephraim Wanderi, who became the entry point into the mega scandals that saw the officials and their families receive cash handouts and other gifts.
+One of the directors, Christopher Smith, used his relationship with KNEC computer manager Ephraim Wanderi, who became the entry point into the mega scandals that saw the officials and their families receive cash handouts and other gifts.
             </p>
             <p>
 
@@ -501,7 +512,7 @@ Mr Oyombra, the Kenyan agent for S&O, received a total of Sh1.7 million for his 
 
             </p>
             <p>
-Prosecutors said the agent, who was paid in commission, was used as a conduit to wire money for onward transmission to the corrupt Knec officials, couched as commission that he was getting as a representative of the UK company.
+Prosecutors said the agent, who was paid in commission, was used as a conduit to wire money for onward transmission to the corrupt KNEC officials, couched as commission that he was getting as a representative of the UK company.
 The deals included a contract to produce and print Optical mark recognition forms, a contract to produce examination certificates and mark sheets, and a contract to produce photo collection forms.
 
             </p>
@@ -526,7 +537,7 @@ Mr Smith also made it clear in the email that he had met Mr Wasanga and Mr Ndua,
 
             </p>
             <p>
-The papers note that there was dissatisfaction at Knec with the existing supplier and Nicholas Smith wished to exploit the opportunity and secure the contract.
+The papers note that there was dissatisfaction at KNEC with the existing supplier and Nicholas Smith wished to exploit the opportunity and secure the contract.
 
             </p>
             <p>
@@ -538,7 +549,7 @@ He added: "Wasanga is playing ball and certainly wants us to win this back."
 
             </p>
             <p>
-The court documents indicate that the final figure Knec paid for the contract was inflated to take care of the officials' kickbacks, setting in motion one of the grandest corruption scandals of recent times, affecting an institution that is meant to be a paragon of virtue, having been tasked with moulding future generations.
+The court documents indicate that the final figure KNEC paid for the contract was inflated to take care of the officials' kickbacks, setting in motion one of the grandest corruption scandals of recent times, affecting an institution that is meant to be a paragon of virtue, having been tasked with moulding future generations.
             </p>
                <span id="ctl00_cphBody_lblCountBody"></span>
                 
@@ -2618,5 +2629,21 @@ el.parentNode.insertBefore(s, el);
     </script>
     <!-- PAGELOADEDSUCCESSFULLY-->
     </form>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"> Kenya National Examinations Council (KNEC) </h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 </body> 
 </html>
