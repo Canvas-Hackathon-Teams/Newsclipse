@@ -1,4 +1,5 @@
 from bson.objectid import ObjectId
+from datetime import datetime
 
 from newsclipse.core import db
 from newsclipse.util import obj_or_404
@@ -32,9 +33,11 @@ def save_card(story, card, key='_id'):
         'status': 'pending',
         'story_id': story['_id'],
         'card': 'event',
+        'created_at': datetime.utcnow(),
         'offset': 0,
     }
     data.update(card)
+    data['updated_at'] = datetime.utcnow()
     q = {key: data.get(key), 'story_id': story['_id']}
     cards.update(q, {'$set': data}, upsert=True)
     card = cards.find_one(q)

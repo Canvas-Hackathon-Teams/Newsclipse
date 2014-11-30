@@ -1,4 +1,5 @@
 from flask import render_template, request
+from datetime import datetime
 from pymongo import ASCENDING
 #from restpager import Pager
 
@@ -24,6 +25,8 @@ def stories_create():
     story = dict(request.json)
     story.pop('_id', None)
     story['cards'] = []
+    story['created_at'] = datetime.utcnow()
+    story['updated_at'] = datetime.utcnow()
     ret = stories.insert(story)
     extract.delay(unicode(ret))
     return stories_get(ret)
@@ -40,6 +43,7 @@ def stories_update(id):
     data = dict(request.json)
     data.pop('_id', None)
     data.pop('cards', None)
+    story['updated_at'] = datetime.utcnow()
     stories.update({'_id': story['_id']}, {'$set': data})
     extract.delay(id)
     return jsonify(get_story(id))
