@@ -107,6 +107,7 @@ def cards_update(story_id, card_id):
     data = dict(request.json)
     data.pop('evidences', None)
     data['_id'] = card['_id']
+    card = save_card(story, data)
     return cards_get(story_id, card_id)
 
 

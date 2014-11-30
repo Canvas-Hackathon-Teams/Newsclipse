@@ -1,6 +1,16 @@
 <div class="card">
   <div class="card-header">
-    <h2 ng-click="expandCard()">
+    <div class="pull-right">
+      <a ng-click="toggleDiscarded()">
+        <img src="/static/img/accept.png" ng-show="card.discarded">
+        <img src="/static/img/decline.png" ng-show="!card.discarded">
+      </a>
+      <a ng-click="expandCard()">
+        <img src="/static/img/expand-blue.png" ng-show="!expanded">
+        <img src="/static/img/collapse-blue.png" ng-show="expanded">
+      </a>
+    </div>
+    <h2>
       <span class="icon icon_{{card.type|lowercase}}"></span>
       <span ng-show="viewMode()" class="card_title">{{card.title}}</span>
       <input ng-show="editMode()" class="card_title" ng-model="card.title">

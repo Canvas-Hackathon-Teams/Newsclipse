@@ -60,6 +60,7 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
       });
       $scope.discardedCards = false;
       $scope.activeCards = false;
+
       angular.forEach(newCards, function(c) {
         c.discarded = c.status == 'discarded';
         if (c.discarded) {
@@ -68,7 +69,9 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
           $scope.activeCards = true;
         }
       });
+      
       $scope.cards = newCards;
+
     });
   };
 
@@ -92,17 +95,32 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
     },
     templateUrl: 'card.html',
     link: function (scope, element, attrs, model) {
-      var url = '/api/stories/' + scope.story._id + '/cards/' + scope.card._id;
       scope.mode = 'view';
       scope.expanded = false;
 
+      var saveCard = function() {
+        var url = '/api/stories/' + scope.story._id + '/cards/' + scope.card._id;
+        scope.card.discarded = scope.card.status == 'discarded';
+        $http.post(url, scope.card).then(function(res) {
+          scope.card = res.data;
+          scope.card.discarded = scope.card.status == 'discarded';
+        });
+      };
+
       scope.toggleMode = function() {
         if (scope.editMode()) {
-          $http.post(url, scope.card).then(function(res) {
-            scope.card = res.data;
-          });
+          saveCard();
         }
         scope.mode = scope.mode == 'view' ? 'edit' : 'view';
+      };
+
+      scope.toggleDiscarded = function() {
+        if (scope.card.status == 'discarded') {
+          scope.card.status = 'approved';
+        } else {
+          scope.card.status = 'discarded';
+        }
+        saveCard();
       };
 
       scope.expandCard = function() {
