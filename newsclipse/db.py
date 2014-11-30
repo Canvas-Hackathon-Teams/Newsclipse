@@ -28,7 +28,8 @@ def get_card(story, id):
     return obj_or_404(cards.find_one(q))
 
 
-def save_card(story, card, aliases=False):
+def save_card(story, card, aliases=False, lookup=True):
+    
     data = {
         'status': 'pending',
         'card': 'event',
@@ -47,8 +48,8 @@ def save_card(story, card, aliases=False):
 
     old = cards.find_one(q)
     if old is not None:
-        data['stories'] = set(old.get('stories') + [story['_id']])
-        data['aliases'] = set(old.get('aliases') + data.get('aliases'))
+        data['stories'] = list(set(old.get('stories') + [story['_id']]))
+        data['aliases'] = list(set(old.get('aliases') + data.get('aliases')))
         cards.update(q, {'$set': data})
     else:
         cards.insert(data)
@@ -57,6 +58,8 @@ def save_card(story, card, aliases=False):
     op = {'$addToSet': {'cards': card['_id']}}
     stories.update({'_id': story['_id']}, op)
     
-    from newsclipse.queue import lookup
-    lookup.delay(unicode(story['_id']), unicode(card['_id']))
+    if lookup:
+        from newsclipse.queue import lookup
+        # lookup.delay(unicode(story['_id']), unicode(card['_id']))
+        lookup(unicode(story['_id']), unicode(card['_id']))
     return card

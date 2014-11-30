@@ -30,7 +30,8 @@ def stories_create():
     story['created_at'] = datetime.utcnow()
     story['updated_at'] = datetime.utcnow()
     ret = stories.insert(story)
-    extract.delay(unicode(ret))
+    # extract.delay(unicode(ret))
+    extract(unicode(ret))
     return stories_get(ret)
 
 
@@ -47,7 +48,8 @@ def stories_update(id):
     data.pop('cards', None)
     story['updated_at'] = datetime.utcnow()
     stories.update({'_id': story['_id']}, {'$set': data})
-    extract.delay(id)
+    # extract.delay(id)
+    extract(id)
     return jsonify(get_story(id))
 
 

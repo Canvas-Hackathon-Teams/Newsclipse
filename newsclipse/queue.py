@@ -24,25 +24,25 @@ def lookup(story_id, card_id):
     card = get_card(story, card_id)
     entity_type = card.get('type')
     
-    #Here you add code, don't forget
-    #that returns a list of different card objects
-
     if entity_type == "Person":
         #run which lookup services
-
         #run trough OpenDuka
-        # openDukaLookup(personNAME!)
-        pass
+        checkDuka(card)
+	
     elif entity_type == "Company":
         #run which lookup services
         #run trough OpenDuka
-        pass
+        checkDuka(card)
+
     elif entity_type == "Organization":
-        #run which lookup services
-        #run trough OpenDuka? probably not
-        pass
-    
-    #title
-    #text
-    #picture (in case of person)
-    #
+		#run which lookup services
+		#run trough OpenDuka? probably not
+        checkDuka(card)
+
+    save_card(story,card,lookup=False)
+
+def checkDuka(card):
+	if 'duka_results' not in card:
+		results = openDukaLookup(card.get('title'))
+		if results is not False:
+			card['duka_results'] = results
