@@ -15,3 +15,4 @@ celery==3.1.17
 python-slugify==0.1.0
 gunicorn
 python-Levenshtein
+wikipedia

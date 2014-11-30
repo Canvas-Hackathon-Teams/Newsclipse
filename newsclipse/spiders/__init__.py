@@ -1,10 +1,11 @@
 import logging
 
 from newsclipse.spiders.openduka import OpenDuka
+from newsclipse.spiders.wiki import Wikipedia
 from newsclipse.db import save_card
 
 log = logging.getLogger(__name__)
-SPIDERS = [OpenDuka]
+SPIDERS = [OpenDuka,Wikipedia]
 
 
 def lookup(story, card):
