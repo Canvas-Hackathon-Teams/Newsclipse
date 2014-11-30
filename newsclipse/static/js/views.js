@@ -101,10 +101,6 @@ App.StoryView = Backbone.View.extend({
     },
     template: "story-editor",
     events: {
-    }
-});
-,
-    events: {
     },
     beforeRender: function() {
         // Add the subviews to the view
