@@ -14,7 +14,6 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http',
 
   $http.get('/api/stories').then(function(res) {
     $scope.stories = res.data;
-    console.log($scope.stories);
   });
 
   $scope.newStory = function() {
