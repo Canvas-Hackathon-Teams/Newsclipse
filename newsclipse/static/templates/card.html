@@ -51,9 +51,11 @@
 
     <div ng-show="hasEvidence()">
       <h3 class="sub_header">Evidence</h3>
-      <div ng-repeat="evidence in card.evidences">
-        <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
-      </div>
+      <ul>
+        <li ng-repeat="evidence in card.evidences">
+          <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

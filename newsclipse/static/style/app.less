@@ -4,7 +4,7 @@
 
 // Local variables
 @brand-primary: #559dc0;
-@loader-color: #d62323;
+@loader-color: #d62323; 
 
 // Reset
 @import "loader.less";
@@ -98,7 +98,7 @@ body {
 }
 
 body {
-    font:1.0em;
+    font: 1.0em;
     background-color: @bgColor;
     font-family: @fontDefault;
 }
@@ -312,6 +312,11 @@ footer {
     .card-title:hover {
         color: @brand-primary;
     }
+
+    ul {
+        padding-left: 1.3em;
+        list-style-type: square;
+    }
 }
 
 /* Nav Tabs aka a mess right now. */
@@ -349,39 +354,44 @@ footer {
     //max-height: 50em;
 }
 
-.evidence_score{
-    background-color: #aaa;
-    color:@white;
-    padding: 2px;  
-}
-
 .inline_block{
         display: inline-block;
 }
 
 
-.evidence_item{
-    margin: 2px 0px;
+.evidence {
+    margin: 2px 0px 7px;
+
+    .citation {
+        .small-caps;
+        text-overflow: ellipsis;
+    }
+
+    .source {
+        display: block;
+        font-size: 0.8em;
+        color: #999;
+        a {
+           color: #999;
+           text-decoration: underline; 
+        }
+
+        .score {
+            //color: @brand-primary;
+        }
+    }
+
+
 }
 
-.evidence_title{
-    .small-caps;
-    display: inline-block;
-    overflow: hidden;
-    height: 13px;
-    max-width: 50%;
-    text-overflow: ellipsis;
-    font-weight: 400;
-    font-size:0.9em;
-}
 
-.evidence_source{
+.evidence_source {
     .small-caps;
     font-size:0.8em;
     height: 15px;
 }
 
-.sub_header{
+.sub_header {
     .small-caps;
     font-weight:400;
     font-size:1.2em;
