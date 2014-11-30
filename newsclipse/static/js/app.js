@@ -82,6 +82,7 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
     link: function (scope, element, attrs, model) {
       var url = '/api/stories/' + scope.story._id + '/cards/' + scope.card._id;
       scope.mode = 'view';
+      scope.expanded = false;
 
       scope.toggleMode = function() {
         if (scope.editMode()) {
@@ -90,6 +91,10 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
           });
         }
         scope.mode = scope.mode == 'view' ? 'edit' : 'view';
+      };
+
+      scope.expandCard = function() {
+        scope.expanded = !scope.expanded;
       };
 
       scope.editMode = function() {

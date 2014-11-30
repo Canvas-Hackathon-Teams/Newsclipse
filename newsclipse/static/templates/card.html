@@ -1,34 +1,35 @@
 <div class="card">
-  <h2>
-    <span class="icon icon_{{card.type|lowercase}}"></span>
-    <span ng-show="viewMode()" class="card_title">{{card.title}}</span>
-    <input ng-show="editMode()" class="card_title" ng-model="card.title">
-  </h2>
-  <p ng-show="hasAliases()">
-    <strong>a.k.a.</strong>
-    <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
-      {{alias}}
-    </span>
-  </p>
-  
-
-
-  <a ng-click="toggleMode()">toggle mode</a>
-
-  <div ng-show="viewMode()">
-    <p>Custom text: {{card.text}}</p>
-    <p>Wiki text: {{card.wiki_text}}</p>
+  <div class="card-header">
+    <h2 ng-click="expandCard()">
+      <span class="icon icon_{{card.type|lowercase}}"></span>
+      <span ng-show="viewMode()" class="card_title">{{card.title}}</span>
+      <input ng-show="editMode()" class="card_title" ng-model="card.title">
+    </h2>
   </div>
-  <div ng-show="editMode()">
-    <textarea ng-model="card.text"></textarea>
-  </div>
+  <div class="card-body" ng-show="expanded">
+    <p ng-show="hasAliases()">
+      <strong>a.k.a.</strong>
+      <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
+        {{alias}}
+      </span>
+    </p>
 
-  <div ng-show="hasEvidence()">
-    <h3>Evidence</h3>
-    <div ng-repeat="evidence in card.evidences">
-      <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+    <a ng-click="toggleMode()">toggle mode</a>
+
+    <div ng-show="viewMode()">
+      <p>Custom text: {{card.text}}</p>
+      <p>Wiki text: {{card.wiki_text}}</p>
+    </div>
+    <div ng-show="editMode()">
+      <textarea ng-model="card.text"></textarea>
+    </div>
+
+    <div ng-show="hasEvidence()">
+      <h3>Evidence</h3>
+      <div ng-repeat="evidence in card.evidences">
+        <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+      </div>
     </div>
   </div>
-
 </div>
 
