@@ -39,15 +39,18 @@
     <a ng-click="toggleMode()">toggle mode</a>
 
     <div ng-show="viewMode()">
-      <p>Custom text: {{card.text}}</p>
-      <p>Wiki text: {{card.wiki_text}}</p>
+      <h3 class="sub_header">Custom text</h3>
+      <p>{{card.text}}</p>
+      
+      <h3 class="sub_header">Wiki text</h3>
+      <p>{{card.wiki_text}}</p>
     </div>
     <div ng-show="editMode()">
       <textarea ng-model="card.text"></textarea>
     </div>
 
     <div ng-show="hasEvidence()">
-      <h3>Evidence</h3>
+      <h3 class="sub_header">Evidence</h3>
       <div ng-repeat="evidence in card.evidences">
         <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
       </div>

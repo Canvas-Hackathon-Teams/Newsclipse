@@ -6334,6 +6334,13 @@ Globals & Mixins
 /* ==========================================================================
 Variables
 ========================================================================== */
+.small-caps {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
 body {
   font: 1.0em;
   background-color: #555555;
@@ -6357,21 +6364,37 @@ h4 {
 .navbar-inverse a,
 .navbar-inverse .navbar-brand {
   color: #ffffff !important;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.navbar-inverse a img,
+.navbar-inverse .navbar-brand img {
+  margin-top: -0.2em;
+  margin-left: 0.2em;
 }
 footer {
   min-height: 4em;
   color: #ffffff;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   padding-top: 1em;
   margin-top: 1em;
   text-align: center;
 }
 .btn {
   width: 100%;
-  font-family: "ProximaNovaCond-Light", sans-serif;
-  font-size: 0.95em;
-  text-transform: uppercase;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   text-align: center;
   -webkit-box-shadow: 0px;
   -moz-box-shadow: 0px;
@@ -6381,10 +6404,10 @@ footer {
   padding: 5px 0;
 }
 .border_left {
-  border-left: 1px solid #b7b7b7;
+  border-left: 1px solid #d7d7d7;
 }
 .border_right {
-  border-right: 1px solid #b7b7b7;
+  border-right: 1px solid #d7d7d7;
 }
 .btn_analyse {
   border: 1px solid #559dc0;
@@ -6399,9 +6422,8 @@ footer {
   width: 100%;
   letter-spacing: 0.05em;
   font-family: "Garamond", serif;
-  font-size: 1.3em;
+  font-size: 1.5em;
   border: 0px;
-  border-left: 2px solid #b7b7b7;
   padding: 10px 8px;
 }
 .input_text {
@@ -6430,13 +6452,10 @@ footer {
   font-family: "ProximaNovaCond-Light";
   font-size: 1.2em;
 }
-.card {
-  border-bottom: 1px solid #d7d7d7;
-  padding: 5px 0;
-}
 .icon {
-  width: 40px;
+  width: 50px;
   height: 40px;
+  float: left;
   background-size: 40px 40px;
   display: -webkit-inline-box;
 }
@@ -6461,33 +6480,96 @@ footer {
   background-position: 2px 0;
 }
 /* Card stuffs */
+.card {
+  border-bottom: 1px solid #d7d7d7;
+  padding: 0.6em 0 0.4em 0;
+}
 .card .card-header .actions a img {
   padding-left: 0.5em;
-  padding-top: 0.5em;
+  padding-top: 0.7em;
   cursor: pointer;
 }
-.card_title {
+.card .card-title {
+  font-size: 1em;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  height: 30px;
-  padding: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-top: 0.8em;
+  cursor: pointer;
+}
+.card .card-title:hover {
+  color: #559dc0;
 }
 /* Nav Tabs aka a mess right now. */
-.nav-tabs.nav-justified > .active > a,
-.nav-tabs.nav-justified > .active > a:hover,
-.nav-tabs.nav-justified > .active > a:focus {
+.card-list .nav-tabs {
+  padding: 0 0 1em 0;
+}
+.card-list .nav-tabs.nav-justified > .active > a,
+.card-list .nav-tabs.nav-justified > .active > a:hover,
+.card-list .nav-tabs.nav-justified > .active > a:focus {
   border: 0px;
   border-radius: 0px;
+  background-color: #559dc0;
+  color: #ffffff;
 }
-.nav-tabs.nav-justified > .active > a:hover {
+.card-list .nav-tabs.nav-justified > .active > a:hover {
   background: #e1e1e1;
 }
-.nav-tabs.nav-justified > li > a {
+.card-list .nav-tabs.nav-justified > li > a {
   border: 0px;
   border-radius: 0px;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
-.nav > li > a {
+.card-list .nav > li > a {
   position: relative;
   display: block;
   padding: 5px 15px;
+}
+.evidence_score {
+  background-color: #aaa;
+  color: #ffffff;
+  padding: 2px;
+}
+.inline_block {
+  display: inline-block;
+}
+.evidence_item {
+  margin: 2px 0px;
+}
+.evidence_title {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: inline-block;
+  overflow: hidden;
+  height: 13px;
+  max-width: 50%;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: 0.9em;
+}
+.evidence_source {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8em;
+  height: 15px;
+}
+.sub_header {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+  font-size: 1.2em;
 }
