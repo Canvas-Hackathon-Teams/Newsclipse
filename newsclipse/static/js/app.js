@@ -43,6 +43,22 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$http',
 }]);
 
 
+nclipse.directive('nclipseCard', ['$http', function($http) {
+  return {
+    restrict: 'E',
+    transclude: true,
+    scope: {
+      'story': '=',
+      'card': '='
+    },
+    templateUrl: 'card.html',
+    link: function (scope, element, attrs, model) {
+      console.log('foo');
+    }
+  };
+}]);
+
+
 nclipse.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
