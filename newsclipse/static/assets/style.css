@@ -6580,6 +6580,10 @@ footer a:hover {
   border: 0px;
   padding: 11px 8px;
 }
+.highlight {
+  background-color: #559dc0;
+  color: #ffffff;
+}
 .input_text {
   border: 0px;
   padding: 15px 0 0 13px;

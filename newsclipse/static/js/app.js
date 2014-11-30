@@ -37,7 +37,8 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoading
 
 nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
   function($scope, $routeParams, $location, $interval, $http, cfpLoadingBar) {
-  var initialLoad = true;
+  var initialLoad = true,
+      realText = null;
 
   $scope.storyId = $routeParams.id;
   $scope.story = {};
@@ -47,6 +48,18 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
 
   $http.get('/api/stories/' + $scope.storyId).then(function(res) {
     $scope.story = res.data;
+  });
+
+  $scope.$on('highlight', function(e, words) {
+    realText = $scope.story.text;
+    var regex = '(' + words.join('|') + ')';
+    $scope.story.text = realText.replace(new RegExp(regex, 'gi'), function(t) {
+      return '<span class="highlight">' + t + '</span>';
+    });
+  });
+
+  $scope.$on('clearHighlight', function(e, words) {
+    $scope.story.text = realText;
   });
 
   var updateCards = function() {
@@ -125,6 +138,14 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
           scope.card.discarded = scope.card.status == 'discarded';
           cfpLoadingBar.complete();
         });
+      };
+
+      scope.mouseIn = function() {
+        scope.$emit('highlight', scope.card.aliases);
+      };
+
+      scope.mouseOut = function() {
+        scope.$emit('clearHighlight');
       };
 
       scope.toggleMode = function() {
