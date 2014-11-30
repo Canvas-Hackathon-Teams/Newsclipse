@@ -60,12 +60,17 @@ App.StoriesCollection = Backbone.Collection.extend({
     comparator: 'title'
 });
 
-App.CardsCollection = Backbone.Collection.extend({
+App.StoryCardsCollection = Backbone.Collection.extend({
     model: App.Card,
     //url: "/api/stories/id/cards",
-    comparator: 'title'
+    comparator: '' // Order of appearance in the story
 });
 
+App.CardsCollection = Backbone.Collection.extend({
+    model: App.Card,
+    url: "/api/cards",
+    comparator: 'title'
+});
 
 // ===================================================================
 // Views
@@ -79,6 +84,12 @@ App.HeaderView = Backbone.View.extend({
 
 App.FooterView = Backbone.View.extend({
     template: "footer",
+    events: {
+    }
+});
+
+App.StoryListView = Backbone.View.extend({
+    template: "story-list",
     events: {
     }
 });
@@ -98,13 +109,9 @@ App.CardsView = Backbone.View.extend({
 App.DefaultView = Backbone.View.extend({
     template: "default",
     initialize: function(options) {
-        this.render();
     },
-    //views: {
-        //"#story": new App.StoryView(),
-        //"#cards": new App.CardsView()
-    //},
     beforeRender: function() {
+        console.log('Adding child views...');
         this.insertView("#story", new App.StoryView() );
         this.insertView("#cards", new App.CardsView() );
     },
@@ -130,7 +137,7 @@ App.Layout = new Backbone.Layout({
 });
 
 App.Router = Backbone.Router.extend({
-    //collection: App.Modules,
+    collection: App.StoriesCollection,
     initialize: function() { 
     },
     routes: {
@@ -138,8 +145,12 @@ App.Router = Backbone.Router.extend({
         '*default': 'defaultRoute'
     },
     start: function() {
+        console.log('App starting...');
         App.Layout.setView("#content", new App.DefaultView());
         App.Layout.render();
+    },
+    defaultRoute: function() {
+        console.log("404");
     }
 });
 
