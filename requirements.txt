@@ -16,3 +16,7 @@ python-slugify==0.1.0
 gunicorn
 python-Levenshtein
 wikipedia
+newspaper
+BeautifulSoup
+re
+urllib

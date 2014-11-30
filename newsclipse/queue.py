@@ -4,6 +4,7 @@ from newsclipse.core import celery as app
 from newsclipse.extract import extract_entities
 from newsclipse.db import get_story, get_card, save_card
 from newsclipse import spiders
+from newsclipse.get_related_stories import get_related
 
 log = logging.getLogger(__name__)
 
@@ -13,7 +14,8 @@ def extract(story_id):
     story = get_story(story_id)
     try:
         for card in extract_entities(story.get('text')):
-            save_card(story, card, aliases=True)
+            if card['card'] == 'entity:'
+                save_card(story, card, aliases=True)
     except Exception, e:
         print e
 
@@ -24,5 +26,13 @@ def lookup(story_id, card_id):
         story = get_story(story_id)
         card = get_card(story, card_id)
         spiders.lookup(story, card)
+    except Exception, e:
+        print e
+
+def get_related_stories(story_id):
+    story = get_story(story_id)
+    try:
+        entities = extract_entities(story.get('text'))
+        return get_related(entities)
     except Exception, e:
         print e

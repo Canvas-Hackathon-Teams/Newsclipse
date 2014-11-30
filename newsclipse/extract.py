@@ -19,6 +19,7 @@ def extract_entities(text):
     data = res.json()
     for k, v in data.items():
         _type = v.get('_type')
+        _typeGroup = v.get('_typeGroup')
         if _type in ['Person', 'Organization', 'Company']:
             aliases = set([v.get('name')])
             for instance in v.get('instances', [{}]):
@@ -30,5 +31,13 @@ def extract_entities(text):
                 'aliases': list(aliases),
                 'offset': v.get('instances', [{}])[0].get('offset'),
                 'card': 'entity',
-                'type': _type
+                'type': _type,
+                'relevance': v.get('relevance')
+            }
+        if _typeGroup == 'socialTag':
+            yield {
+                'title': v.get('name'),
+                'card': 'misc',
+                'relevance': 1.0/float(v.get('importance')),
+                'type': 'social'
             }
