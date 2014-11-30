@@ -68,6 +68,10 @@ App.StoryCardsCollection = Backbone.Collection.extend({
     comparator: '' // Order of appearance in the story
 });
 
+App.StoryCards = new App.StoryCardsCollection({
+
+});
+
 App.CardsCollection = Backbone.Collection.extend({
     model: App.Card,
     url: "/api/cards",
@@ -132,10 +136,49 @@ App.StoryListView = Backbone.View.extend({
     },
 });
 
+App.CardListItemView = Backbone.View.extend({
+    model: App.Card,
+    cardId: '',
+    initialize: function() {
+        console.log('Card list item view initalized...');
+        this.cardId = this.model.get('_id');
+    },
+    template: "card-list-item",
+    events: {
+        // Listen for a click anywhere on the sub-view
+        "click": "viewCardDetail"
+    },
+    viewCardDetail: function() { 
+        App.router.navigate("card/" + this.cardId, {
+            trigger: true
+        });
+    }
+});
+
+App.CardEditorView = Backbone.View.extend({
+    collection: App.StoryCards,
+    initialize: function() {
+        console.log('Card editor view initalized...');
+    },
+    template: "card-editor",
+    events: {
+    },
+    beforeRender: function() {
+        // Add the subviews to the view
+        this.collection.each(function(card) {
+            this.insertView("#card-list", new App.CardListItemView({
+                model: card
+            }));
+        }, this);
+    }
+});
 
 App.StoryView = Backbone.View.extend({
     initialize: function() {
         console.log('Story view initalized...');
+    },
+    views: {
+        "#card-editor": new App.CardEditorView(),
     },
     template: "story-editor",
     events: {
