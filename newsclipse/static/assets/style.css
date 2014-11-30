@@ -6580,6 +6580,10 @@ footer a:hover {
   border: 0px;
   padding: 11px 8px;
 }
+.highlight {
+  background-color: #559dc0;
+  color: #ffffff;
+}
 .input_text {
   border: 0px;
   padding: 15px 0 0 13px;
@@ -6650,7 +6654,7 @@ footer a:hover {
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-top: 0.8em;
+  padding-top: 0.7em;
   cursor: pointer;
 }
 .card .card-title .count {
@@ -6659,12 +6663,11 @@ footer a:hover {
 .card .card-title:hover {
   color: #559dc0;
 }
-<<<<<<< HEAD
-=======
-.card .card-title-edit {
+.card .card-title.card-title-edit {
   width: 70%;
+  margin-top: 0.6em;
+  padding-top: 0.1em;
 }
->>>>>>> some small clean up in hasWiki and a lost console.log also started on new card
 .card ul {
   padding-left: 1.3em;
   list-style-type: square;
@@ -6735,7 +6738,8 @@ footer a:hover {
 }
 .editField {
   width: 78%;
-  height: 100px;
+  height: 300px;
+  border: 1px solid #d7d7d7;
 }
 .sub_header {
   font-size: 1em;

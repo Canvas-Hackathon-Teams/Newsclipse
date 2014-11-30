@@ -219,6 +219,11 @@ footer {
     padding: 11px 8px;
 }
 
+.highlight {
+    background-color: @brand-primary;
+    color: @white;
+}
+
 .input_text{
     border: 0px;
     padding: 15px 0 0 13px;
@@ -301,7 +306,7 @@ footer {
 
     .card-title {
         .small-caps;
-        margin-top: 0.8em;
+        padding-top: 0.7em;
         cursor: pointer;
 
         .count {
@@ -313,8 +318,10 @@ footer {
         color: @brand-primary;
     }
     
-    .card-title-edit{
-        width:70%;
+    .card-title.card-title-edit{
+        width: 70%;
+        margin-top: 0.6em;
+        padding-top: 0.1em;
     }
 
     ul {
@@ -355,7 +362,6 @@ footer {
 
 .card-list {
     overflow-y: scroll;
-    //max-height: 50em;
 }
 
 .inline_block{
@@ -393,7 +399,8 @@ footer {
 
 .editField{
     width: 78%;
-    height:100px;
+    height: 300px;
+    border: 1px solid @borderColor;
 }
 
 .sub_header{
