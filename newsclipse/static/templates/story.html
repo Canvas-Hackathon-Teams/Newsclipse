@@ -13,16 +13,20 @@
       </p>
     </div>
   </div>
-  <div class="col-md-7 border_right card-list">
-    <tabset justified="true">
+  <div class="col-md-7 border_right">
+    <tabset justified="true" class="card-tabs">
       <tab heading="Cards" disabled="!activeCards">
-        <div ng-repeat="card in cards" ng-hide="card.discarded">
-          <nclipse-card story="story" card="card"></nclipse-card>
+        <div class="card-list">
+          <div ng-repeat="card in cards" ng-hide="card.discarded">
+            <nclipse-card story="story" card="card"></nclipse-card>
+          </div>
         </div>
       </tab>
       <tab heading="Discarded" disabled="!discardedCards">
-        <div ng-repeat="card in cards" ng-show="card.discarded">
-          <nclipse-card story="story" card="card"></nclipse-card>
+        <div class="card-list">
+          <div ng-repeat="card in cards" ng-show="card.discarded">
+            <nclipse-card story="story" card="card"></nclipse-card>
+          </div>
         </div>
       </tab>
       <tab heading="New Card">
