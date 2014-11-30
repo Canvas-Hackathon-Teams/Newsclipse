@@ -1,9 +1,37 @@
-<input ng-model="story.title">
-<p>
-  <textarea ng-model="story.text"></textarea>
-</p>
-<input type="submit" ng-click="saveStory()" value="Analyze">
+<div class="row">
+  <div class="col-md-5 border_left border_right">
+    <div class="col-md-12 save-bar">
+      <button type="button" class="btn btn_analyse btn-default" ng-click="saveStory()">Save &amp; Analyze</button>
+    </div>
+    <div class="col-md-12">
+      <input class="input_title" ng-model="story.title" placeholder="New Story">
+      </div>
+      <div class="col-md-12">
+      <p>
 
-<ul>
-  <li ng-repeat="card in cards">{{card.title}} ({{card.type}})</li>
-</ul>
+        <textarea class="input_text" ng-model="story.text" rows='28' placeholder="On April 15, in the early hours of the morning..."></textarea>
+      </p>
+    </div>
+  </div>
+  <div class="col-md-7 border_right">
+    <tabset justified="true" class="card-tabs">
+      <tab heading="{{activeCards}} Cards" disabled="!activeCards">
+        <div class="card-list">
+          <div ng-repeat="card in cards" ng-hide="card.discarded">
+            <nclipse-card story="story" card="card"></nclipse-card>
+          </div>
+        </div>
+      </tab>
+      <tab heading="{{discardedCards}} Discarded" disabled="!discardedCards">
+        <div class="card-list">
+          <div ng-repeat="card in cards" ng-show="card.discarded">
+            <nclipse-card story="story" card="card"></nclipse-card>
+          </div>
+        </div>
+      </tab>
+      <tab heading="New Card">
+        <nclipse-new-card story="story"></nclipse-new-card>
+      </tab>
+    </tabset>
+  </div>
+</div>

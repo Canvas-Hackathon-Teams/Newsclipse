@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-header">
+    <div class="pull-right actions">
+      <a ng-click="toggleDiscarded()">
+        <img src="/static/img/accept.png" ng-show="card.discarded">
+        <img src="/static/img/decline.png" ng-show="!card.discarded">
+      </a>
+      <a ng-click="expandCard()">
+        <img src="/static/img/expand-blue.png" ng-show="!expanded">
+        <img src="/static/img/collapse-blue.png" ng-show="expanded">
+      </a>
+    </div>
+    <div>
+      <span class="icon icon_{{card.type|lowercase}}"></span>
+      <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">
+        {{card.title}}
+        <span class="count" ng-show="card.evidences.length > 1">
+          {{card.evidences.length}} leads
+        </span>
+        <span class="count" ng-show="card.evidences.length == 1">
+          one lead
+        </span>
+        <span class="count" ng-show="card.evidences.length <= 0">
+          no leads
+        </span>
+      </div>
+      <input ng-show="editMode()" class="card-title card-title-edit" ng-model="card.title">
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="card-body" ng-show="expanded">
+   <!--  <p ng-show="hasAliases()">
+      <strong>a.k.a.</strong>
+      <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
+        {{alias}}
+      </span>
+    </p> -->
+
+    <!-- <a ng-click="toggleMode()">toggle mode</a> -->
+
+    <div ng-hide="hasWiki()">
+    <h3 class="sub_header">Notes<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
+    <div ng-show="viewMode()">
+      <p>{{card.text}}</p>
+    </div>
+    <div ng-show="editMode()">
+      <textarea class="editField" ng-model="card.text"></textarea>
+    </div>
+  </div>
+
+    <div ng-show="hasWiki()">
+    <h3 class="sub_header">Wikipedia summary<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
+    <div ng-show="viewMode()">
+      <p>{{card.wiki_text}}</p>
+    </div>
+    <div ng-show="editMode()">
+      <textarea class="editField" ng-model="card.wiki_text"></textarea>
+    </div>
+  </div>
+
+    <div ng-show="hasEvidence()">
+      <h3 class="sub_header">Evidence</h3>
+      <ul>
+        <li ng-repeat="evidence in card.evidences">
+          <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

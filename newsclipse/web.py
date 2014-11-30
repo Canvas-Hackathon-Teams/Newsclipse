@@ -35,7 +35,8 @@ def reset():
 
 @app.route('/api/stories', methods=['GET'])
 def stories_index():
-    return jsonify(stories.find())
+    cur = stories.find({'$where': 'this.title.length > 1'})
+    return jsonify(cur)
 
 
 @app.route('/api/stories', methods=['POST', 'PUT'])
@@ -87,7 +88,8 @@ def cards_create(story_id):
     card = dict(request.json)
     card.pop('_id', None)
     card.pop('evidences', None)
-    return jsonify(save_card(story, card))
+    card = save_card(story, card)
+    return cards_get(story_id, unicode(card['_id']))
 
 
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['GET'])
@@ -95,7 +97,7 @@ def cards_get(story_id, card_id):
     story = get_story(story_id)
     card = get_card(story, card_id)
     card['evidences'] = get_evidences(card)
-    return obj_or_404(card)
+    return jsonify(card)
 
 
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['POST', 'PUT'])
@@ -105,6 +107,7 @@ def cards_update(story_id, card_id):
     data = dict(request.json)
     data.pop('evidences', None)
     data['_id'] = card['_id']
-    return jsonify(save_card(story, data))
+    card = save_card(story, data)
+    return cards_get(story_id, card_id)
 
 

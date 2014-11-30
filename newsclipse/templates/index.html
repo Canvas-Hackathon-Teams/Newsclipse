@@ -10,16 +10,48 @@
         {% endassets %}
         
         <link rel="shortcut icon" href="http://assets.pudo.org/img/opennews-favicon.ico" type="image/x-icon" />
+        <link href='http://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
     </head>
     <body ng-controller="AppCtrl" ng-cloak>
-        <header>
-        </header>
+        <div id="page">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/#/">
+                            <img src="/static/img/logo.png">
+                            <span class="text"><span class="boldish">news</span>clip.se</span>
+                        </a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li class="">
+                                <a ng-click="newStory()">New Story <img src="/static/img/newcard.png"></a>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
 
-        <div class="container">
-          <div ng-view></div>
-        </div><!-- /.container -->
+            <section class="container">
+              <div ng-view></div>
+            </section><!-- /.container -->
+        </div>
 
         <footer>
+            <div class="container">
+                <p>A hack from the <a href="http://canvas.aljazeera.com/">CANVAS</a> hackday at Al Jazeera, Doha.</p>
+                <p>
+                    <a href="https://twitter.com/phillipadsmith">@philipadsmith</a> &middot;
+                    <a href="https://twitter.com/Bfaviero">@Bfaviero</a> &middot;
+                    <a href="https://twitter.com/EvaConstantaras">@EvaConstantaras</a> &middot;
+                    <a href="https://twitter.com/HeinzeHavinga">@HeinzeHavinga</a> &middot;
+                    <a href="https://twitter.com/kasiadybek">@kasiadybek</a> &middot;
+                    <a href="https://twitter.com/pudo">@pudo</a>
+                </p>
+                <p>
+                    Licensed as MIT software, <a href="https://github.com/Canvas-Hackathon-Teams/Newsclipse">source code</a>
+                </p>
+            </div>
         </footer>
     </div>
     {% assets "js" %}

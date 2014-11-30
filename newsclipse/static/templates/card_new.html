@@ -1,0 +1,9 @@
+<form ng-submit="newCard()" ng-model"newCard.type">
+  <select>
+  <option style="background-image:url(male.png);">organisation</option>
+  <option style="background-image:url(female.png);">company</option>
+  <option style="background-image:url(others.png);">people</option>
+</select> 
+
+<input ng-show="editMode()" class="card-title card-title-edit" ng-model="newCard.title">
+</form>

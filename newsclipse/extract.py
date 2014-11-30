@@ -5,6 +5,8 @@ from newsclipse.core import calais_key
 
 
 def extract_entities(text):
+    if text is None or len(text.strip()) < 10:
+        return
     URL = 'http://api.opencalais.com/tag/rs/enrich'
     headers = {
         'x-calais-licenseID': calais_key,
