@@ -7,6 +7,7 @@ from newsclipse.core import app
 from newsclipse.db import reset_db
 from newsclipse.db import stories, get_story, cards
 from newsclipse.db import save_card, get_card
+from newsclipse.db import get_evidences
 from newsclipse.util import obj_or_404, jsonify, AppEncoder
 from newsclipse.queue import extract
 
@@ -65,7 +66,11 @@ def cards_index(story_id):
     story = get_story(story_id)
     cur = cards.find({'stories': story['_id']})
     cur = cur.sort('offset', ASCENDING)
-    return jsonify(cur)
+    cards_ = []
+    for card in cur:
+        card['evidences'] = get_evidences(card)
+        cards_.append(card)
+    return jsonify(cards_)
 
 
 @app.route('/api/stories/<story_id>/cards', methods=['POST', 'PUT'])
@@ -73,13 +78,16 @@ def cards_create(story_id):
     story = get_story(story_id)
     card = dict(request.json)
     card.pop('_id', None)
+    card.pop('evidences', None)
     return jsonify(save_card(story, card))
 
 
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['GET'])
 def cards_get(story_id, card_id):
     story = get_story(story_id)
-    return obj_or_404(get_card(story, card_id))
+    card = get_card(story, card_id)
+    card['evidences'] = get_evidences(card)
+    return obj_or_404(card)
 
 
 @app.route('/api/stories/<story_id>/cards/<card_id>', methods=['POST', 'PUT'])
@@ -87,6 +95,7 @@ def cards_update(story_id, card_id):
     story = get_story(story_id)
     card = obj_or_404(get_card(story, card_id))
     data = dict(request.json)
+    data.pop('evidences', None)
     data['_id'] = card['_id']
     return jsonify(save_card(story, data))
 

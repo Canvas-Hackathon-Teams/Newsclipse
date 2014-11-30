@@ -1,4 +1,5 @@
 from bson.objectid import ObjectId
+from pymongo import DESCENDING
 from datetime import datetime
 
 from newsclipse.core import db
@@ -76,8 +77,14 @@ def save_evidence(card, evidence):
     else:
         evidence['cards'] = list(set(existing['cards'] + [card['_id']]))
     evidence['updated_at'] = datetime.utcnow()
+    evidence['score'] = evidence.get('score') or 0
     evidences.update(q, evidence, upsert=True)
     evidence = evidences.find_one(q)
     op = {'$addToSet': {'evidences': evidence['_id']}}
     cards.update({'_id': card['_id']}, op)
     return evidence
+
+
+def get_evidences(card):
+    q = {'cards': card['_id']}
+    return evidences.find(q).sort('score', DESCENDING)

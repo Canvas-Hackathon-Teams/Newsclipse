@@ -10,13 +10,15 @@ API_KEY = '86a6b32f398fe7b3e0a7e13c96b4f032'
 
 class OpenDuka(Spider):
 
-    def make_evidence(self, card, id, score, type_, record):
+    def make_evidence(self, card, id, score, type_, record, idx):
         label = record.get('Citation',
                            record.get('title',
                                       record.get('Name')))
+        if len(label) > 100:
+            label = label[:100] + '...'
         evidence = {
             'citation': '%s: %s' % (type_, label),
-            'url': URL + 'homes/tree/%s' % id,
+            'url': URL + 'homes/tree/%s#match%s' % (id, idx),
             'source': 'OpenDuka',
             'score': score,
             'source_url': 'http://openduka.org'
@@ -26,6 +28,7 @@ class OpenDuka(Spider):
     def search_all(self, story, card):
         args = {'key': API_KEY, 'term': card.get('title')}
         r = requests.get(URL + "api/search", params=args)
+        idx = 1
         for match in r.json():
             score = text_score(match.get('Name'), card.get('aliases'))
             if score < 50:
@@ -38,5 +41,6 @@ class OpenDuka(Spider):
                         for item in ds:
                             for record in item.get('dataset'):
                                 self.make_evidence(card, match.get('ID'),
-                                                   score, type_, record)
+                                                   score, type_, record, idx)
+                                idx = idx + 1
         return card
