@@ -22,19 +22,13 @@ def lookup(story_id, card_id):
     #Here you add code, don't forget
     #that returns a list of different card objects
 
-    if entity_type == "person":
+    if entity_type == "Person":
         #run which lookup services
         pass
-    elif entity_type == "places":
+    elif entity_type == "Company":
         #run which lookup services
         pass
-    elif entity_type == "social tags":
-        #run which lookup services
-        pass
-    elif entity_type == "companies":
-        #run which lookup services
-        pass
-    elif entity_type == "organisations":
+    elif entity_type == "Organization":
         #run which lookup services
         pass
     
