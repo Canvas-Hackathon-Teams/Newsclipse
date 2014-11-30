@@ -1,34 +1,44 @@
-var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
+var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar']);
 
+nclipse.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+  cfpLoadingBarProvider.includeSpinner = false;
+  cfpLoadingBarProvider.latencyThreshold = 500;
+  //cfpLoadingBarProvider.parentSelector = 'section';
+}]);
 
-nclipse.controller('AppCtrl', ['$scope', '$location', '$http',
-  function($scope, $location, $http) {
+nclipse.controller('AppCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
+  function($scope, $location, $http, cfpLoadingBar) {
 
   $scope.newStory = function() {
+    cfpLoadingBar.start();
     var empty = {'title': '', 'text': ''};
     $http.post('/api/stories', empty).then(function(res) {
       $location.path('/stories/' + res.data._id);
+      cfpLoadingBar.complete();
     });
   };
 
 }]);
 
 
-nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http',
-  function($scope, $location, $http) {
+nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http', 'cfpLoadingBar',
+  function($scope, $location, $http, cfpLoadingBar) {
   
   $scope.stories = [];
 
+  cfpLoadingBar.start();
   $http.get('/api/stories').then(function(res) {
     $scope.stories = res.data;
+    cfpLoadingBar.complete();
   });
 
 }]);
 
 
-nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http',
-  function($scope, $routeParams, $location, $interval, $http) {
-  
+nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http', 'cfpLoadingBar',
+  function($scope, $routeParams, $location, $interval, $http, cfpLoadingBar) {
+  var initialLoad = true;
+
   $scope.storyId = $routeParams.id;
   $scope.story = {};
   $scope.cards = [];
@@ -40,7 +50,10 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
   });
 
   var updateCards = function() {
-    $http.get('/api/stories/' + $scope.storyId + '/cards').then(function(res) {
+    if (initialLoad) {
+      cfpLoadingBar.start();
+    }
+    $http.get('/api/stories/' + $scope.storyId + '/cards', {ignoreLoadingBar: true}).then(function(res) {
       var newCards = [];
       angular.forEach(res.data, function(c) {
         var exists = false;
@@ -71,21 +84,26 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
       });
 
       $scope.cards = newCards;
-
+      if (initialLoad) {
+        initialLoad = false;
+        cfpLoadingBar.complete();
+      }
     });
   };
 
   $interval(updateCards, 2000);
   
   $scope.saveStory = function () {
+    cfpLoadingBar.start();
     $http.post('/api/stories/' + $scope.storyId, $scope.story).then(function(res) {
       console.log('Saved the story!');
+      cfpLoadingBar.complete();
     });
   };
 
 }]);
 
-nclipse.directive('nclipseCard', ['$http', function($http) {
+nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
@@ -99,11 +117,13 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
       scope.expanded = false;
 
       var saveCard = function() {
+        cfpLoadingBar.start();
         var url = '/api/stories/' + scope.story._id + '/cards/' + scope.card._id;
         scope.card.discarded = scope.card.status == 'discarded';
         $http.post(url, scope.card).then(function(res) {
           scope.card = res.data;
           scope.card.discarded = scope.card.status == 'discarded';
+          cfpLoadingBar.complete();
         });
       };
 

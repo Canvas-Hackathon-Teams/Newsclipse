@@ -51,6 +51,7 @@ assets.register('js', Bundle("vendor/angular/angular.js",
                              "vendor/angular-animate/angular-animate.js",
                              "vendor/angular-bootstrap/ui-bootstrap.js",
                              "vendor/angular-bootstrap/ui-bootstrap-tpls.js",
+                             "vendor/angular-loading-bar/build/loading-bar.js",
                              "js/app.js",
                              filters='uglifyjs',
                              output='assets/app.js'))
