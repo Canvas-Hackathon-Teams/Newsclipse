@@ -12,10 +12,11 @@ App.Stories = new App.StoriesCollection(STORIES);
 
 App.StoryCardsCollection = Backbone.Collection.extend({
     model: App.Card,
-    //url: "/api/stories/" + storyId + "/cards",
-    comparator: 'offset' // Order of appearance in the story
-});
-
-App.StoryCards = new App.StoryCardsCollection({
-
+    storyId: '',
+    url: '',
+    initialize: function(options) {
+        this.storyId = options.storyId; 
+        this.url = "/api/stories/" + this.storyId + "/cards";
+    },
+    comparator: 'offset', // Order of appearance in the story
 });

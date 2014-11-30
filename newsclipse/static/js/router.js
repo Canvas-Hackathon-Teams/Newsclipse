@@ -14,8 +14,12 @@ App.Router = Backbone.Router.extend({
             "_id": id 
         });
         if (story) {
+            var cards = story.get('cards');
+            console.log(cards);
+            App.StoryCards = new App.StoryCardsCollection({ storyId: story.get('_id') }); 
             App.Layout.setView("#content", new App.StoryView({
-                model: story
+                model: story,
+                cards: App.StoryCards
             }));
             App.Layout.render();
         } else {

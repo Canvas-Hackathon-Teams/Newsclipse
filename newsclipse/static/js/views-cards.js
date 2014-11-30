@@ -18,9 +18,10 @@ App.CardListItemView = Backbone.View.extend({
 });
 
 App.CardEditorView = Backbone.View.extend({
-    collection: App.StoryCards,
-    initialize: function() {
+    collection: '',
+    initialize: function(options) {
         console.log('Card editor view initalized...');
+        this.collection = options.cards;
     },
     template: "card-editor",
     events: {

@@ -45,7 +45,7 @@ App.StoryView = Backbone.View.extend({
         console.log('Story view initalized...');
     },
     views: {
-        "#card-editor": new App.CardEditorView(),
+        //"#card-editor": new App.CardEditorView(),
     },
     template: "story-editor",
     events: {
