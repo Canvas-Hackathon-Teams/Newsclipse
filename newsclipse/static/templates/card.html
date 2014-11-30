@@ -12,7 +12,18 @@
     </div>
     <div>
       <span class="icon icon_{{card.type|lowercase}}"></span>
-      <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">{{card.title}}</div>
+      <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">
+        {{card.title}}
+        <span class="count" ng-show="card.evidences.length > 1">
+          {{card.evidences.length}} leads
+        </span>
+        <span class="count" ng-show="card.evidences.length == 1">
+          one lead
+        </span>
+        <span class="count" ng-show="card.evidences.length <= 0">
+          no leads
+        </span>
+      </div>
       <input ng-show="editMode()" class="card-title" ng-model="card.title">
     </div>
     <div class="clearfix"></div>

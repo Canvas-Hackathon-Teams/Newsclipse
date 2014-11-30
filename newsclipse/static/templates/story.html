@@ -4,7 +4,7 @@
       <button type="button" class="btn btn_analyse btn-default" ng-click="saveStory()">Save &amp; Analyze</button>
     </div>
     <div class="col-md-12">
-      <input class="input_title" ng-model="story.title" placeholder="15 People involved in corruption (you won't believe number seven)!">
+      <input class="input_title" ng-model="story.title" placeholder="New Story">
       </div>
       <div class="col-md-12">
       <p>
@@ -15,14 +15,14 @@
   </div>
   <div class="col-md-7 border_right">
     <tabset justified="true" class="card-tabs">
-      <tab heading="Cards" disabled="!activeCards">
+      <tab heading="{{activeCards}} Cards" disabled="!activeCards">
         <div class="card-list">
           <div ng-repeat="card in cards" ng-hide="card.discarded">
             <nclipse-card story="story" card="card"></nclipse-card>
           </div>
         </div>
       </tab>
-      <tab heading="Discarded" disabled="!discardedCards">
+      <tab heading="{{discardedCards}} Discarded" disabled="!discardedCards">
         <div class="card-list">
           <div ng-repeat="card in cards" ng-show="card.discarded">
             <nclipse-card story="story" card="card"></nclipse-card>

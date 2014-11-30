@@ -154,6 +154,16 @@ footer {
     padding-top: 1em;
     //margin-top: 1em;
     text-align: center; 
+
+    a {
+        color: darken(@white, 20%);
+        //font-weight: 600;
+        //text-decoration: underline;
+    }
+
+    a:hover {
+        color: darken(@white, 40%);
+    }
 }
 
 .save-bar {
@@ -288,6 +298,10 @@ footer {
         .small-caps;
         padding-top: 0.8em;
         cursor: pointer;
+
+        .count {
+            color: darken(@borderColor, 10%);
+        }
     }
 
     .card-title:hover {

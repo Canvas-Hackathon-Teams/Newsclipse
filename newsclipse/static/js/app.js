@@ -32,8 +32,8 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
   $scope.storyId = $routeParams.id;
   $scope.story = {};
   $scope.cards = [];
-  $scope.activeCards = false;
-  $scope.discardedCards = false;
+  $scope.activeCards = 0;
+  $scope.discardedCards = 0;
 
   $http.get('/api/stories/' + $scope.storyId).then(function(res) {
     $scope.story = res.data;
@@ -58,18 +58,18 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
         }
         return a.offset - b.offset;
       });
-      $scope.discardedCards = false;
-      $scope.activeCards = false;
+      $scope.discardedCards = 0;
+      $scope.activeCards = 0;
 
       angular.forEach(newCards, function(c) {
         c.discarded = c.status == 'discarded';
         if (c.discarded) {
-          $scope.discardedCards = true;
+          $scope.discardedCards++;
         } else {
-          $scope.activeCards = true;
+          $scope.activeCards++;
         }
       });
-      
+
       $scope.cards = newCards;
 
     });
