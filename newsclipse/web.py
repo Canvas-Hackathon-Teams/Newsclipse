@@ -9,7 +9,7 @@ from newsclipse.db import reset_db
 from newsclipse.db import stories, get_story, cards
 from newsclipse.db import save_card, get_card
 from newsclipse.db import get_evidences
-from newsclipse.util import obj_or_404, jsonify, AppEncoder
+from newsclipse.util import obj_or_404, jsonify  # , AppEncoder
 from newsclipse.queue import extract
 
 
@@ -25,10 +25,9 @@ def angular_templates():
 
 @app.route('/')
 def home():
-    stories_ = stories.find()
-    stories_ = AppEncoder().encode(stories_)
-    return render_template("index.html", stories=stories_,
-                           templates=angular_templates())
+    #stories_ = stories.find()
+    #stories_ = AppEncoder().encode(stories_)
+    return render_template("index.html", templates=angular_templates())
 
 
 @app.route('/api/nuke', methods=['POST', 'PUT'])

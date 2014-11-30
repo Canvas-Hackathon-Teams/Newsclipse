@@ -1,5 +1,8 @@
-I'm a banana!
-
+<input ng-model="story.title">
+<p>
+  <textarea ng-model="story.text"></textarea>
+</p>
+<input type="submit" ng-click="saveStory()" value="Analyze">
 
 <ul>
   <li ng-repeat="card in cards">{{card.title}} ({{card.type}})</li>
