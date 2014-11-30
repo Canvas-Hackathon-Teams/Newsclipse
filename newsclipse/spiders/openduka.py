@@ -14,8 +14,8 @@ class OpenDuka(Spider):
         label = record.get('Citation',
                            record.get('title',
                                       record.get('Name')))
-        if len(label) > 100:
-            label = label[:100] + '...'
+        if len(label) > 80:
+            label = label[:80] + '...'
         evidence = {
             'citation': '%s: %s' % (type_, label),
             'url': URL + 'homes/tree/%s#match%s' % (id, idx),
