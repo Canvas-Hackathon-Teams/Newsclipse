@@ -27,8 +27,8 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http',
 }]);
 
 
-nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$http',
-  function($scope, $routeParams, $location, $http) {
+nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interval', '$http',
+  function($scope, $routeParams, $location, $interval, $http) {
   
   $scope.storyId = $routeParams.id;
   $scope.story = {};
@@ -38,10 +38,32 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$http',
     $scope.story = res.data;
   });
 
-  $http.get('/api/stories/' + $scope.storyId + '/cards').then(function(res) {
-    $scope.cards = res.data;
-  });
+  var updateCards = function() {
+    $http.get('/api/stories/' + $scope.storyId + '/cards').then(function(res) {
+      var newCards = [];
+      angular.forEach(res.data, function(c) {
+        var exists = false;
+        angular.forEach($scope.cards, function(o) {
+          if (o['_id'] == c['_id']) {
+            exists = true; 
+          }
+        });
+        if (!exists) newCards.push(c);
+      });
+      newCards = newCards.concat($scope.cards);
+      newCards.sort(function(a, b) {
+        console.log(a.offset, b.offset);
+        if (a.offset == b.offset) {
+          return a.updated_at.localeCompare(b.updated_at);
+        }
+        return a.offset - b.offset;
+      });
+      $scope.cards = newCards;
+    });
+  };
 
+  $interval(updateCards, 2000);
+  
   $scope.saveStory = function () {
     $http.post('/api/stories/' + $scope.storyId, $scope.story).then(function(res) {
       console.log('Saved the story!');
