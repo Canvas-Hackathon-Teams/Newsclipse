@@ -14,7 +14,15 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http',
 
   $http.get('/api/stories').then(function(res) {
     $scope.stories = res.data;
+    console.log($scope.stories);
   });
+
+  $scope.newStory = function() {
+    var empty = {'title': '', 'text': ''};
+    $http.post('/api/stories', empty).then(function(res) {
+      $location.path('/stories/' + res.data._id);
+    });
+  };
 
 }]);
 
@@ -36,7 +44,7 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$http',
 
   $scope.saveStory = function () {
     $http.post('/api/stories/' + $scope.storyId, $scope.story).then(function(res) {
-      console.log('Saved!');
+      console.log('Saved the story!');
     });
   };
 

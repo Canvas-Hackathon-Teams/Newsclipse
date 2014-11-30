@@ -3,6 +3,11 @@
     <small>{{card.type}}</small>
     {{card.title}}
   </h2>
+  <p>
+    <strong>a.k.a.</strong>
+    <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
+      {{alias}}
+    </span>
 
   <p>Custom text: {{card.text}}</p>
   <p>Wiki text: {{card.wiki_text}}</p>

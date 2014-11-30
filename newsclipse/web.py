@@ -35,7 +35,8 @@ def reset():
 
 @app.route('/api/stories', methods=['GET'])
 def stories_index():
-    return jsonify(stories.find())
+    cur = stories.find({'$where': 'this.title.length > 1'})
+    return jsonify(cur)
 
 
 @app.route('/api/stories', methods=['POST', 'PUT'])

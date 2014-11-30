@@ -1,3 +1,7 @@
 <ul>
-  <li ng-repeat="story in stories"><a href="#/stories/{{story._id}}">{{story.title}}</a></li>
+  <li ng-repeat="story in stories">
+    <a href="#/stories/{{story._id}}">{{story.title}}</a>
+  </li>
 </ul>
+
+<input ng-click="newStory()" type="submit" value="New">
