@@ -9,7 +9,8 @@ def extract_entities(text):
     headers = {
         'x-calais-licenseID': calais_key,
         'content-type': 'text/raw',
-        'accept': 'application/json'
+        'accept': 'application/json',
+        'enableMetadataType': 'SocialTags'
     }
     res = requests.post(URL, headers=headers,
                         data=text.encode('utf-8'))
