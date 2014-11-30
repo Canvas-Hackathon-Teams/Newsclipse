@@ -72,17 +72,9 @@ Globals & Mixins
 Variables
 ========================================================================== */
 
-// Breakpoints
-
-//("all", 0px),
-//("small", 420px),
-//("medium", 640px),
-//("large", 960px),
-//("xlarge", 1200px)
-
-
 // Style tiles, Colours
 @white: #ffffff;
+@bgColor: #828282;
 
 // Style tiles, Fonts
 @fontDefault: "ProximaNova-Regular", Verdana, sans-serif;
@@ -110,8 +102,12 @@ Layout
 ========================================================================== */
 body {
     /* Move down content because we have a fixed navbar that is 50px tall */
-    padding-top: 50px;
     font:1.0em;
+    background-color: @bgColor;
+}
+
+#page {
+    background-color: @white;
 }
 
 /* ==========================================================================
@@ -120,14 +116,24 @@ Modules
 
 // Module: Header navigation
 .navbar-inverse {
-    background-color: #E5E5E5;
-    border-color: #e5e5e5;
+    background-color: @bgColor;
+    border: 0;
+    color: @white;
+    margin-bottom: 1em;
+
+    a, .navbar-brand { 
+        color: @white !important;
+        text-transform: uppercase;
+    }
 }
 
 // Module: Footer
 footer {
-    height: 100px;
-    background-color: #E5E5E5;
+    min-height: 4em;
+    color: @white;
+    padding-top: 1em;
+    margin-top: 1em;
+    text-align: center; 
 }
 
 /* ==========================================================================
@@ -150,71 +156,6 @@ Progressively enhance for larger screens
     /* Put high-resolution display styles here */
 }
 
-/* ==========================================================================
-Print styles.
-Should be inlined to avoid required HTTP connection: h5bp.com/r
-========================================================================== */
-@media print {
-    * {
-        background: transparent !important;
-        color: #000 !important; /* Black prints faster: h5bp.com/s */
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-
-    a,
-    a:visited {
-        text-decoration: underline;
-    }
-
-    a[href]:after {
-        content: " (" attr(href) ")";
-    }
-
-    abbr[title]:after {
-        content: " (" attr(title) ")";
-    }
-
-    /*
-     * Don't show links for images, or javascript/internal links
-     */
-
-a[href^="javascript:"]:after,
-a[href^="#"]:after {
-    content: "";
-}
-
-pre,
-blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-}
-
-thead {
-    display: table-header-group; /* h5bp.com/t */
-}
-
-tr,
-img {
-    page-break-inside: avoid;
-}
-
-img {
-    max-width: 100% !important;
-}
-
-p,
-h2,
-h3 {
-    orphans: 3;
-    widows: 3;
-}
-
-h2,
-h3 {
-    page-break-after: avoid;
-}
-}
 /* ==========================================================================
 Building up the page, will repair this later
 ========================================================================== */

@@ -4,6 +4,13 @@ var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate']);
 nclipse.controller('AppCtrl', ['$scope', '$location', '$http',
   function($scope, $location, $http) {
 
+  $scope.newStory = function() {
+    var empty = {'title': '', 'text': ''};
+    $http.post('/api/stories', empty).then(function(res) {
+      $location.path('/stories/' + res.data._id);
+    });
+  };
+
 }]);
 
 
@@ -15,13 +22,6 @@ nclipse.controller('StoryListCtrl', ['$scope', '$location', '$http',
   $http.get('/api/stories').then(function(res) {
     $scope.stories = res.data;
   });
-
-  $scope.newStory = function() {
-    var empty = {'title': '', 'text': ''};
-    $http.post('/api/stories', empty).then(function(res) {
-      $location.path('/stories/' + res.data._id);
-    });
-  };
 
 }]);
 
