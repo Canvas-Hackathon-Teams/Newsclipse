@@ -24,13 +24,10 @@ App.Stories = new App.StoriesCollection(STORIES);
 
 App.StoryCardsCollection = Backbone.Collection.extend({
     model: App.Card,
-    //url: "/api/stories/id/cards",
-    comparator: '' // Order of appearance in the story
+    //url: "/api/stories/" + storyId + "/cards",
+    comparator: 'offset' // Order of appearance in the story
 });
 
-App.StoryCards = new App.StoryCardsCollection({
-
-});
 
 App.CardsCollection = Backbone.Collection.extend({
     model: App.Card,
