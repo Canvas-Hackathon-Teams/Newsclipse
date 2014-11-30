@@ -42,11 +42,35 @@ Backbone.Layout.configure({
 // Models
 // ===================================================================
 
+App.Card = Backbone.Model.extend({ 
+
+});
+
+App.Story = Backbone.Model.extend({ 
+
+});
 
 // ===================================================================
 // Collections
 // ===================================================================
 
+App.StoriesCollection = Backbone.Collection.extend({
+    model: App.Story,
+    url: "/api/stories",
+    comparator: 'title'
+});
+
+App.StoryCardsCollection = Backbone.Collection.extend({
+    model: App.Card,
+    //url: "/api/stories/id/cards",
+    comparator: '' // Order of appearance in the story
+});
+
+App.CardsCollection = Backbone.Collection.extend({
+    model: App.Card,
+    url: "/api/cards",
+    comparator: 'title'
+});
 
 // ===================================================================
 // Views
@@ -64,11 +88,39 @@ App.FooterView = Backbone.View.extend({
     }
 });
 
-App.DefaultView = Backbone.View.extend({
-    template: "default",
+App.StoryListView = Backbone.View.extend({
+    template: "story-list",
     events: {
     }
 });
+
+App.StoryView = Backbone.View.extend({
+    template: "story-editor",
+    events: {
+    }
+});
+
+App.CardsView = Backbone.View.extend({
+    template: "card-editor",
+    events: {
+    }
+});
+
+App.DefaultView = Backbone.View.extend({
+    template: "default",
+    initialize: function(options) {
+    },
+    beforeRender: function() {
+        console.log('Adding child views...');
+        this.insertView("#story", new App.StoryView() );
+        this.insertView("#cards", new App.CardsView() );
+    },
+    events: {
+    }
+});
+
+
+
 
 // ===================================================================
 // Layouts
@@ -81,12 +133,11 @@ App.Layout = new Backbone.Layout({
     views: {
         "header": new App.HeaderView(),
         "footer": new App.FooterView(),
-        "content": new App.DefaultView()
     }
 });
 
 App.Router = Backbone.Router.extend({
-    //collection: App.Modules,
+    collection: App.StoriesCollection,
     initialize: function() { 
     },
     routes: {
@@ -94,7 +145,12 @@ App.Router = Backbone.Router.extend({
         '*default': 'defaultRoute'
     },
     start: function() {
+        console.log('App starting...');
+        App.Layout.setView("#content", new App.DefaultView());
         App.Layout.render();
+    },
+    defaultRoute: function() {
+        console.log("404");
     }
 });
 

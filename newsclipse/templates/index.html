@@ -1,13 +1,31 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}(Untitled){% endblock %} - {{config.PROJECT_DESCRIPTION}}</title>
+        
+        {% assets "css" %}
+        <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet">
+        {% endassets %}
+    </head>
+    <body>
+        <header>
+        </header>
 
-{% block title %}
-    {{config.PROJECT_NAME}}  
-{% endblock %}
-    {{config.PROJECT_DESCRIPTON}}
-{% block description %}
-  
-{% endblock %}
+        <div class="container">
+          <div id="content"></div>
+        </div><!-- /.container -->
 
-{% block content %}
-
-{% endblock %}
+        <footer>
+        </footer>
+    </div>
+    <script>var STORIES = {{stories | safe}};</script>
+    {% assets "tmpl" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% assets "js" %}
+    <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+</body>
+</html>

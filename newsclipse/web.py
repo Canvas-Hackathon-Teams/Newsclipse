@@ -6,13 +6,15 @@ from pymongo import ASCENDING
 from newsclipse.core import app
 from newsclipse.db import stories, get_story, cards
 from newsclipse.db import save_card, get_card
-from newsclipse.util import obj_or_404, jsonify
+from newsclipse.util import obj_or_404, jsonify, AppEncoder
 from newsclipse.queue import extract
 
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    stories_ = stories.find()
+    stories_ = AppEncoder().encode(stories_)
+    return render_template("index.html", stories=stories_)
 
 
 @app.route('/api/stories', methods=['GET'])
