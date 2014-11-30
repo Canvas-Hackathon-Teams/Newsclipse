@@ -6758,6 +6758,8 @@ footer a:hover {
 #story-list .jumbotron {
   background-color: #E0EEF4;
   border-radius: 0px;
+  background: url('/static/img/pattern.png') no-repeat;
+  background-size: cover;
 }
 #story-list .jumbotron h2 {
   font-family: 'Open Sans', sans-serif;
@@ -6770,8 +6772,38 @@ footer a:hover {
 }
 #story-list .btn {
   border-radius: 0px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+#story-list table thead {
+  background: #C1C5C6;
+  color: white;
+  text-transform: uppercase;
+}
+#story-list table caption {
+  text-align: center;
+  text-transform: uppercase;
+}
+#story-list td.title {
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-top: 0.8em;
+  cursor: pointer;
+}
+#story-list td.title a {
+  text-decoration: none;
+  color: inherit;
+}
+#story-list td.title a:hover {
+  color: #559dc0;
 }
 #story-list td.summary,
 #story-list td.cards {
   color: #B3B3B3;
+}
+.table > thead > tr > th {
+  border-bottom: none;
 }

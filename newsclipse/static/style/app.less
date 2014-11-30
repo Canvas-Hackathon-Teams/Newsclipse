@@ -420,6 +420,8 @@ footer {
     .jumbotron {
         background-color: #E0EEF4;
         border-radius: 0px;
+        background: url('/static/img/pattern.png') no-repeat;
+        background-size: cover;
         h2 {
             font-family: 'Open Sans', sans-serif;
         }
@@ -432,8 +434,40 @@ footer {
     }
     .btn {
         border-radius: 0px;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    table {
+        thead {
+            background: #C1C5C6;
+            color: white;
+            text-transform: uppercase;
+        }
+        caption {
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+    td.title {
+        font-size: 1em;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding-top: 0.8em;
+        cursor: pointer;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover {
+            color: @brand-primary;
+        }
     }
     td.summary, td.cards {
         color: #B3B3B3;
     }
+}
+.table > thead > tr > th {
+    border-bottom: none;
 }
