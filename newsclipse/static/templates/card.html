@@ -51,7 +51,7 @@
     <div ng-show="hasWiki()">
     <h3 class="sub_header">Wikipedia summary<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
     <div ng-show="viewMode()">
-      <p>{{card.wiki_text}}</p>
+      <p>{{card.wiki_text | characters:300 }}</p>
     </div>
     <div ng-show="editMode()">
       <textarea class="editField" ng-model="card.wiki_text"></textarea>
