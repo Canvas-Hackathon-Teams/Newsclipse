@@ -1,4 +1,4 @@
-var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate']);
+var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
 
 nclipse.controller('AppCtrl', ['$scope', '$location', '$http',

@@ -15,20 +15,25 @@
     <!-- <input type="submit" ng-click="saveStory()" value="Analyze"> -->
   </div>
   <div class="col-md-6">
-    <nclipse-new-card story="story"></nclipse-new-card>
-
-
-  <tabset vertical="true" type="pills" class="nav nav-tabs">
-    <tab class="tablabel active" heading="Vertical 1">Selected</tab>
-    <tab class="tablabel" heading="Vertical 1">Declined</tab>
-    <tab class="tablabel" heading="Vertical 1">Filter</tab>
-  </tabset>
-
-  <!-- <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="tablabel active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Selected</a></li>
-    <li role="presentation" class="tablabel"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Declined</a></li>
-    <li role="presentation" class="tablabel"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Filter (should not be tab)</a></li>
-  </ul> -->
+    <tabset justified="true">
+      <tab heading="Cards">
+        <div ng-repeat="card in cards">
+          <nclipse-card story="story" card="card"></nclipse-card>
+        </div>
+      </tab>
+      <tab heading="Discarded">
+        <div ng-repeat="card in cards">
+          <nclipse-card story="story" card="card"></nclipse-card>
+        </div>
+      </tab>
+      <tab heading="New Card">
+        <nclipse-new-card story="story"></nclipse-new-card>
+      </tab>
+    </tabset>
+    
+    <!--
+    
+    -->
 
     <div ng-repeat="card in cards">
       <nclipse-card story="story" card="card"></nclipse-card>
