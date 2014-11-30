@@ -6338,7 +6338,7 @@ Variables
 Global 
 ========================================================================== */
 body {
-  font-family: "Lucida Grande", Verdana, sans-serif;
+  font-family: "ProximaNova-Regular", Verdana, sans-serif;
 }
 /* ==========================================================================
 Type
@@ -6355,6 +6355,7 @@ Layout
 body {
   /* Move down content because we have a fixed navbar that is 50px tall */
   padding-top: 50px;
+  font: 1.0em;
 }
 /* ==========================================================================
 Modules 
@@ -6437,4 +6438,64 @@ Should be inlined to avoid required HTTP connection: h5bp.com/r
   h3 {
     page-break-after: avoid;
   }
+}
+/* ==========================================================================
+Building up the page, will repair this later
+========================================================================== */
+.btn {
+  width: 100%;
+  font-family: "ProximaNovaCond-Light", sans-serif;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  border: 0px;
+  -webkit-box-shadow: 0px;
+  -moz-box-shadow: 0px;
+  border-radius: 0px;
+  text-shadow: 0px;
+  box-shadow: 0px;
+}
+/*Text input part*/
+.input_title {
+  width: 100%;
+  letter-spacing: 0.05em;
+  font-family: "Garamond", serif;
+  font-size: 1.5em;
+  border: 0px;
+  border-left: 2px solid #b7b7b7;
+  padding: 10px 8px;
+}
+.input_text {
+  border: 0px;
+  /*    padding:0px 8px;*/
+  width: 100%;
+  height: 100%;
+}
+/*Right Side*/
+.tablabel {
+  font-family: "ProximaNovaCond-Light", sans-serif;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  width: 33%;
+}
+.nav-tabs > li > a {
+  border-radius: 0px;
+}
+.active {
+  border: 0px;
+  /*    background:#e1e1e1;*/
+}
+.nav-tabs {
+  border: 0px;
+}
+.tab-header {
+  font-family: "ProximaNovaCond-Light";
+  font-size: 1.2em;
+}
+.card {
+  border-bottom: 1px solid #d7d7d7;
+  padding: 5px 0;
 }
