@@ -1,4 +1,7 @@
+from bson.objectid import ObjectId
+
 from newsclipse.core import db
+from newsclipse.util import obj_or_404
 
 stories = db['stories']
 cards = db['cards']
@@ -9,3 +12,28 @@ def reset_db():
         if name.startswith('system.'):
             continue
         db[name].drop()
+
+
+def get_story(id):
+    if not isinstance(id, ObjectId):
+        id = ObjectId(id)
+    return obj_or_404(stories.find_one({'_id': id}))
+
+
+def save_card(story, card, key='_id'):
+    data = {
+        'status': 'pending',
+        'story_id': story['_id'],
+        'card': 'event',
+        'offset': 0,
+    }
+    data.update(card)
+    q = {key: data.get(key), 'story_id': story['_id']}
+    cards.update(q, {'$set': data}, upsert=True)
+    card = cards.find_one(q)
+    up = {'$addToSet': {'cards': card['_id']}}
+    stories.update({'_id': story['_id']}, up)
+    
+    from newsclipse.queue import lookup
+    lookup.delay(unicode(story['_id']), unicode(card['_id']))
+    return card

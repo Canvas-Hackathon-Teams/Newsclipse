@@ -2,18 +2,25 @@ import logging
 
 from newsclipse.core import celery as app
 from newsclipse.extract import extract_entities
+from newsclipse.db import get_story, save_card
 
 log = logging.getLogger(__name__)
 
 
 @app.task
 def extract(story_id):
-    test = "Vladimir Putin is giving Angela Merkel a big fat wet kiss!"
-    entities = extract_entities(test)
+    story = get_story(story_id)
+    for card in extract_entities(story.get('text')):
+        save_card(story, card, key='title')
 
+<<<<<<< HEAD
 	
 @app.task
 def lookup(story_id, entity_name, entity_type):
+=======
+
+def lookup(story_id, card_id):
+>>>>>>> db4f9374cf91247bad0fb867ef2aa7ecd588863d
 
 	#Here you add code, don't forget
 	#that returns a list of different card objects
