@@ -1,18 +1,17 @@
 <div class="row">
   <div class="col-md-5 border_left border_right">
-    <div class="col-md-12">
-    <button type="button" class="btn btn_analyse btn-default" ng-click="saveStory()" value="Analyze">Analyse</button>
-  </div>
-  <div class="col-md-12">
-    <input class="input_title" ng-model="story.title" placeholder="15 People involved in corruption (you won't believe number seven)!">
+    <div class="col-md-12 save-bar">
+      <button type="button" class="btn btn_analyse btn-default" ng-click="saveStory()">Save &amp; Analyze</button>
     </div>
     <div class="col-md-12">
-    <p>
+      <input class="input_title" ng-model="story.title" placeholder="15 People involved in corruption (you won't believe number seven)!">
+      </div>
+      <div class="col-md-12">
+      <p>
 
-      <textarea class="input_text" ng-model="story.text" rows='28'placeholder="On April 15, in the early hours of the morning..."></textarea>
-    </p>
-  </div>
-    <!-- <input type="submit" ng-click="saveStory()" value="Analyze"> -->
+        <textarea class="input_text" ng-model="story.text" rows='28'placeholder="On April 15, in the early hours of the morning..."></textarea>
+      </p>
+    </div>
   </div>
   <div class="col-md-7 border_right card-list">
     <tabset justified="true">
