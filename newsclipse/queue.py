@@ -20,6 +20,9 @@ def extract(story_id):
 
 @app.task
 def lookup(story_id, card_id):
-    story = get_story(story_id)
-    card = get_card(story, card_id)
-    spiders.lookup(story, card)
+    try:
+        story = get_story(story_id)
+        card = get_card(story, card_id)
+        spiders.lookup(story, card)
+    except Exception, e:
+        print e

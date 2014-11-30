@@ -1,46 +1,41 @@
-from newsclipse.spiders.util import Spider
+import requests
+from pprint import pprint
+
+from newsclipse.db import save_evidence
+from newsclipse.spiders.util import Spider, text_score
+
+URL = "http://www.openduka.org/index.php/"
+API_KEY = '86a6b32f398fe7b3e0a7e13c96b4f032'
 
 
 class OpenDuka(Spider):
-    pass
 
-
-import requests
-
-def openDukaLookup(term):
-    #TODO: please export this as a env variable
-    key = '86a6b32f398fe7b3e0a7e13c96b4f032'
-    # payload = {'key': key, 'term': 'KENYA NATIONAL EXAMINATIONS COUNCIL'}
-    payload = {'key': key, 'term': term}
-    r = requests.get("http://www.openduka.org/index.php/api/search", params=payload)
-    ids = r.json()
+    def make_evidence(self, card, id, type_, record):
+        #print record.keys()
+        label = record.get('Citation',
+                           record.get('title',
+                                      record.get('Name')))
+        evidence = {
+            'citation': '%s: %s' % (type_, label),
+            'url': URL + 'homes/tree/%s' % id,
+            'source': 'OpenDuka',
+            'source_url': 'http://openduka.org'
+        }
+        save_evidence(card, evidence)
     
-    if len(ids) > 0:
-
-        entId = ids[0]['ID']
-        payload = {'key': key, 'id': entId}
-        r = requests.get("http://www.openduka.org/index.php/api/entity", params=payload)
-        connections = r.json()
-        data = connections['data']
-        returnLinks = []
-        for typeSet in data:
-            # print "new typeset!"
-            dataset_types= typeSet['dataset_type']
-            for types in dataset_types:
-                label = types.keys()[0]
-                link = "http://www.openduka.org/index.php/homes/tree/%s" % entId
-                returnLinks.append({
-                                    "type":label,
-                                    "amount":len(label),
-                                    "link":link
-                                    })
-                #return a array of objects
-                # return a card object for every datatype, this will be a part of a person or company card
-        return returnLinks
-    else: 
-        return False
-        
-        
-
-# openduka = Openduka()
-# openduka.lookup('KENYA NATIONAL EXAMINATIONS COUNCIL')
+    def search_all(self, story, card):
+        args = {'key': API_KEY, 'term': card.get('title')}
+        r = requests.get(URL + "api/search", params=args)
+        for match in r.json():
+            if text_score(match.get('Name'), card.get('aliases')) < 50:
+                continue
+            args = {'key': API_KEY, 'id': match.get('ID')}
+            r = requests.get(URL + "api/entity", params=args)
+            for type_set in r.json().get('data'):
+                for data in type_set['dataset_type']:
+                    for type_, ds in data.items():
+                        for item in ds:
+                            for record in item.get('dataset'):
+                                self.make_evidence(card, match.get('ID'),
+                                                   type_, record)
+        return card
