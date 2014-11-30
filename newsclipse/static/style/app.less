@@ -116,6 +116,12 @@ h1, h2, h3, h4 {
     a, .navbar-brand { 
         color: @white !important;
         .small-caps;
+        cursor: pointer;
+
+        img {
+            margin-top: -0.2em;
+            margin-left: 0.2em;
+        }
     }
 }
 
@@ -123,6 +129,7 @@ h1, h2, h3, h4 {
 footer {
     min-height: 4em;
     color: @white;
+    .small-caps;
     padding-top: 1em;
     margin-top: 1em;
     text-align: center; 
@@ -162,12 +169,12 @@ footer {
 
 /*Text input part*/
 .input_title{
-    width:100%;
+    width: 100%;
     letter-spacing: 0.05em;
     font-family:"Garamond",serif;
-    font-size:1.3em;
+    font-size:1.5em;
     border: 0px;
-    border-left: 2px solid #b7b7b7;
+    //border-left: 2px solid #b7b7b7;
     padding: 10px 8px;
 }
 
@@ -253,26 +260,40 @@ footer {
     .card-title {
         .small-caps;
         padding-top: 0.8em;
+        cursor: pointer;
+    }
+
+    .card-title:hover {
+        color: @brand-primary;
     }
 }
 
 /* Nav Tabs aka a mess right now. */
-.nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus{
-    border: 0px;
-    border-radius:0px;
-}
+.card-list {
+    .nav-tabs {
+        padding: 0 0 1em 0;
+    }
 
-.nav-tabs.nav-justified > .active > a:hover{
-    background:#e1e1e1;
-}
+    .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:hover, .nav-tabs.nav-justified > .active > a:focus{
+        border: 0px;
+        border-radius: 0px;
+        background-color: @brand-primary;
+        color: @white;
+    }
 
-.nav-tabs.nav-justified > li > a{
-    border: 0px;
-    border-radius:0px;
-}
+    .nav-tabs.nav-justified > .active > a:hover{
+        background: #e1e1e1;
+    }
 
-.nav > li > a{
-    position: relative;
-    display: block;
-    padding: 5px 15px;
+    .nav-tabs.nav-justified > li > a{
+        border: 0px;
+        border-radius:0px;
+        .small-caps;
+    }
+
+    .nav > li > a{
+        position: relative;
+        display: block;
+        padding: 5px 15px;
+    }
 }

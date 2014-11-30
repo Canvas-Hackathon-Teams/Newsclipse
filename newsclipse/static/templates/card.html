@@ -12,7 +12,7 @@
     </div>
     <div>
       <span class="icon icon_{{card.type|lowercase}}"></span>
-      <div ng-show="viewMode()" class="card-title">{{card.title}}</div>
+      <div ng-show="viewMode()" ng-click="expandCard()" class="card-title">{{card.title}}</div>
       <input ng-show="editMode()" class="card-title" ng-model="card.title">
     </div>
     <div class="clearfix"></div>
