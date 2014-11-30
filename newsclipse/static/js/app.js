@@ -99,6 +99,14 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
       scope.viewMode = function() {
         return scope.mode == 'view';
       };
+
+      scope.hasEvidence = function() {
+        return scope.card.evidences.length > 0;
+      };
+
+      scope.hasAliases = function() {
+        return scope.card.aliases.length > 1;
+      };
     }
   };
 }]);

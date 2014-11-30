@@ -4,11 +4,14 @@
     <span ng-show="viewMode()">{{card.title}}</span>
     <input ng-show="editMode()" ng-model="card.title">
   </h2>
-  <p>
+  <p ng-show="hasAliases()">
     <strong>a.k.a.</strong>
     <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
       {{alias}}
     </span>
+  </p>
+  
+
 
   <a ng-click="toggleMode()">toggle mode</a>
 
@@ -20,9 +23,11 @@
     <textarea ng-model="card.text"></textarea>
   </div>
 
-  <h3>Evidence</h3>
-  <div ng-repeat="evidence in card.evidences">
-    <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+  <div ng-show="hasEvidence()">
+    <h3>Evidence</h3>
+    <div ng-repeat="evidence in card.evidences">
+      <nclipse-evidence story="story" card="card" evidence="evidence"></nclipse-evidence>
+    </div>
   </div>
 
 </div>
