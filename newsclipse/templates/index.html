@@ -12,14 +12,29 @@
         <link rel="shortcut icon" href="http://assets.pudo.org/img/opennews-favicon.ico" type="image/x-icon" />
     </head>
     <body ng-controller="AppCtrl" ng-cloak>
-        <header>
-        </header>
+        <div id="page">
+            <nav class="navbar navbar-inverse" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">newsclip.se</a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li class=""><a href="#">New Story</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
 
-        <div class="container">
-          <div ng-view></div>
-        </div><!-- /.container -->
+            <div class="container">
+              <div ng-view></div>
+            </div><!-- /.container -->
+        </div>
 
         <footer>
+            <div class="container">
+                A hack from the CANVAS hackday at Al Jazeera, Doha. 
+            </div>
         </footer>
     </div>
     {% assets "js" %}
