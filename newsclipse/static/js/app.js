@@ -1,4 +1,4 @@
-var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar', 'contenteditable', 'truncate']);
+var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar']);
 
 nclipse.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;
@@ -212,7 +212,23 @@ nclipse.directive('nclipseNewCard', ['$http', function($http) {
     },
     templateUrl: 'card_new.html',
     link: function (scope, element, attrs, model) {
-      scope.card = {'score': 100};
+      scope.card = {'score': 100, 'type': 'Company'};
+      scope.typeOptions = ["Company", "Person", "Organization"];
+      
+
+      scope.selectType = function(index){
+          scope.card.type = scope.typeOptions[index];
+          console.log(scope.card.type);
+      }
+
+      scope.saveCard = function() {
+        cfpLoadingBar.start();
+        var url = '/api/stories/' + scope.story._id + '/cards';
+        $http.post(url, scope.card).then(function(res) {
+          scope.card = res.data;
+          cfpLoadingBar.complete();
+        });
+      };
 
     }
   };

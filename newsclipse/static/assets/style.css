@@ -6663,7 +6663,8 @@ footer a:hover {
 .card .card-title:hover {
   color: #559dc0;
 }
-.card .card-title.card-title-edit {
+
+.card .card-title-edit {
   width: 70%;
   margin-top: 0.6em;
   padding-top: 0.1em;

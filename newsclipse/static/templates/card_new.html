@@ -1,9 +1,10 @@
-<form ng-submit="newCard()" ng-model"newCard.type">
-  <select>
-  <option style="background-image:url(male.png);">organisation</option>
-  <option style="background-image:url(female.png);">company</option>
-  <option style="background-image:url(others.png);">people</option>
-</select> 
+<form ng-submit="saveCard()">
 
-<input ng-show="editMode()" class="card-title card-title-edit" ng-model="newCard.title">
+
+<img ng-click="selectType(0)" class="pseudo_link" src="/static/img/company.png"/>
+<img ng-click="selectType(1)" class="pseudo_link" src="/static/img/person.png"/>
+<img ng-click="selectType(2)" class="pseudo_link" src="/static/img/institution.png"/>
+
+<input class="card-title card-title-edit" ng-model="card.title">
+<input type="submit" label="submit"></input>
 </form>
