@@ -75,6 +75,7 @@ Variables
 // Style tiles, Colours
 @white: #ffffff;
 @bgColor: #555;
+@borderColor: #d7d7d7;
 
 // Style tiles, Fonts
 @fontDefault: 'Open Sans', sans-serif;
@@ -139,11 +140,11 @@ footer {
 }
 
 .border_left{
-    border-left:1px solid #b7b7b7;
+    border-left:1px solid @borderColor;
 }
 
 .border_right{
-    border-right:1px solid #b7b7b7;
+    border-right:1px solid @borderColor;
 }
 
 .btn_analyse{
@@ -200,10 +201,6 @@ footer {
     font-size: 1.2em;
 }
 
-.card{
-    border-bottom:1px solid #d7d7d7;
-    padding: 5px 0;
-}
 .icon{
     width:40px;
     height:40px;
@@ -238,6 +235,9 @@ footer {
 /* Card stuffs */
 
 .card {
+    border-bottom:1px solid @borderColor;
+    padding: 5px 0;
+
     .card-header {
         .actions a img {
             padding-left: 0.5em;
