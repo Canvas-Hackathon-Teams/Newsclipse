@@ -59,6 +59,23 @@ nclipse.directive('nclipseCard', ['$http', function($http) {
 }]);
 
 
+nclipse.directive('nclipseEvidence', ['$http', function($http) {
+  return {
+    restrict: 'E',
+    transclude: true,
+    scope: {
+      'story': '=',
+      'card': '=',
+      'evidence': '='
+    },
+    templateUrl: 'evidence.html',
+    link: function (scope, element, attrs, model) {
+      console.log('foo');
+    }
+  };
+}]);
+
+
 nclipse.config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
