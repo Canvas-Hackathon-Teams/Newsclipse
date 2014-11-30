@@ -1,8 +1,8 @@
 <div class="card">
   <h2>
-    <span class="icon icon_{{card.type|lowercase}}">{{card.type}}</small>
-    <span ng-show="viewMode()">{{card.title}}</span>
-    <input ng-show="editMode()" ng-model="card.title">
+    <span class="icon icon_{{card.type|lowercase}}"></span>
+    <span ng-show="viewMode()" class="card_title">{{card.title}}</span>
+    <input ng-show="editMode()" class="card_title" ng-model="card.title">
   </h2>
   <p>
     <strong>a.k.a.</strong>

@@ -6354,19 +6354,32 @@ Layout
 ========================================================================== */
 body {
   /* Move down content because we have a fixed navbar that is 50px tall */
-  padding-top: 50px;
   font: 1.0em;
+  background-color: #828282;
+}
+#page {
+  background-color: #ffffff;
 }
 /* ==========================================================================
 Modules 
 ========================================================================== */
 .navbar-inverse {
-  background-color: #E5E5E5;
-  border-color: #e5e5e5;
+  background-color: #828282;
+  border: 0;
+  color: #ffffff;
+  margin-bottom: 1em;
+}
+.navbar-inverse a,
+.navbar-inverse .navbar-brand {
+  color: #ffffff !important;
+  text-transform: uppercase;
 }
 footer {
-  height: 100px;
-  background-color: #E5E5E5;
+  min-height: 4em;
+  color: #ffffff;
+  padding-top: 1em;
+  margin-top: 1em;
+  text-align: center;
 }
 /* ==========================================================================
 Progressively enhance for larger screens 
@@ -6382,62 +6395,6 @@ Progressively enhance for larger screens
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   /* Put high-resolution display styles here */
-}
-/* ==========================================================================
-Print styles.
-Should be inlined to avoid required HTTP connection: h5bp.com/r
-========================================================================== */
-@media print {
-  * {
-    background: transparent !important;
-    color: #000 !important;
-    /* Black prints faster: h5bp.com/s */
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-  /*
-     * Don't show links for images, or javascript/internal links
-     */
-  a[href^="javascript:"]:after,
-  a[href^="#"]:after {
-    content: "";
-  }
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-  thead {
-    display: table-header-group;
-    /* h5bp.com/t */
-  }
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-  img {
-    max-width: 100% !important;
-  }
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
 }
 /* ==========================================================================
 Building up the page, will repair this later
@@ -6498,4 +6455,30 @@ Building up the page, will repair this later
 .card {
   border-bottom: 1px solid #d7d7d7;
   padding: 5px 0;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  background-size: 35px 35px;
+  display: -webkit-inline-box;
+}
+.icon_organization {
+  background: url("/static/img/institution.png") no-repeat;
+  background-size: 26px;
+  background-position: 2px 0;
+}
+.icon_person {
+  background: url("/static/img/person.png") no-repeat;
+  background-size: 26px;
+  background-position: 2px 0;
+}
+.icon_event {
+  background: url("/static/img/theme.png") no-repeat;
+  background-size: 26px;
+  background-position: 2px 0;
+}
+.icon_company {
+  background: url("/static/img/company.png") no-repeat;
+  background-size: 26px;
+  background-position: 2px 0;
 }
