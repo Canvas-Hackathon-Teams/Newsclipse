@@ -103,3 +103,27 @@ App.StoryView = Backbone.View.extend({
     events: {
     }
 });
+,
+    events: {
+    },
+    beforeRender: function() {
+        // Add the subviews to the view
+        this.collection.each(function(story) {
+            this.insertView("#stories-list", new App.StoryListItemView({
+                model: story
+            }));
+        }, this);
+    },
+});
+
+App.StoryView = Backbone.View.extend({
+    initialize: function() {
+        console.log('Story view initalized...');
+    },
+    views: {
+        "#card-editor": new App.CardEditorView(),
+    },
+    template: "story-editor",
+    events: {
+    }
+});
