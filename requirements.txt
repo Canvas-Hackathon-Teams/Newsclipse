@@ -18,5 +18,3 @@ python-Levenshtein
 wikipedia
 newspaper
 BeautifulSoup
-re
-urllib
