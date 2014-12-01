@@ -60,11 +60,17 @@ class OpenCorporates(Spider):
 
     def search_company(self, story, card):
         query = {'q': card.get('title')}
+        failures = 0
         for company in opencorporates_paginate('companies/search', 'companies',
                                                'company', query):
             url = company.get('opencorporates_url')
             score = text_score(company.get('name'), card.get('aliases'))
             if score < 70:
+                failures += 1
+            else:
+                failures = 0
+
+            if failures > 3:
                 break
 
             citation = 'Company record: %s' % company.get('name')
@@ -73,11 +79,17 @@ class OpenCorporates(Spider):
 
     def search_person(self, story, card):
         query = {'q': card.get('title')}
+        failures = 0
         for officer in opencorporates_paginate('officers/search', 'officers',
                                                'officer', query):
             url = officer.get('opencorporates_url')
             score = text_score(officer.get('name'), card.get('aliases'))
             if score < 70:
+                failures += 1
+            else:
+                failures = 0
+
+            if failures > 3:
                 break
 
             corp_data = officer.get('company')

@@ -62,8 +62,8 @@ def save_card(story, card, aliases=False, lookup=True):
     stories.update({'_id': story['_id']}, op)
 
     if lookup:
-        from newsclipse.queue import lookup
-        lookup.delay(unicode(story['_id']), unicode(card['_id']))
+        from newsclipse.queue import lookup_all
+        lookup_all(unicode(story['_id']), unicode(card['_id']))
 
     return card
 

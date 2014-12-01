@@ -20,12 +20,17 @@ def extract(story_id):
         log.exception(e)
 
 
+def lookup_all(story_id, card_id):
+    for spider_name in spiders.SPIDERS:
+        lookup.delay(story_id, card_id, spider_name)
+
+
 @app.task
-def lookup(story_id, card_id):
+def lookup(story_id, card_id, spider_name):
     try:
         story = get_story(story_id)
         card = get_card(story, card_id)
-        spiders.lookup(story, card)
+        spiders.lookup(story, card, spider_name)
     except Exception, e:
         log.exception(e)
 
