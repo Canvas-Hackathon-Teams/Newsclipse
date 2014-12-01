@@ -29,15 +29,6 @@
     <div class="clearfix"></div>
   </div>
   <div class="card-body" ng-show="expanded">
-   <!--  <p ng-show="hasAliases()">
-      <strong>a.k.a.</strong>
-      <span ng-repeat="alias in card.aliases" ng-hide="alias == card.title">
-        {{alias}}
-      </span>
-    </p> -->
-
-    <!-- <a ng-click="toggleMode()">toggle mode</a> -->
-
     <div ng-hide="hasWiki()">
     <h3 class="sub_header">Notes<img class="pseudo_link" ng-click="toggleMode()" src="/static/img/edit.png"></h3>
     <div ng-show="viewMode()">
@@ -45,6 +36,9 @@
     </div>
     <div ng-show="editMode()">
       <textarea class="editField" ng-model="card.text"></textarea>
+      <div>
+        <button class="btn" ng-click="toggleMode()">Save</button>
+      </div>
     </div>
   </div>
 
@@ -55,6 +49,9 @@
     </div>
     <div ng-show="editMode()">
       <textarea class="editField" ng-model="card.wiki_text"></textarea>
+      <div>
+        <button class="btn" ng-click="toggleMode()">Save</button>
+      </div>
     </div>
   </div>
 

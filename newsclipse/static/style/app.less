@@ -158,6 +158,8 @@ footer {
     padding-top: 1em;
     //margin-top: 1em;
     text-align: center; 
+    font-size: 0.8em !important;
+    
 
     a {
         color: darken(@white, 20%);
@@ -216,7 +218,7 @@ footer {
     font-size: 2em;
     border: 0px;
     //border-left: 2px solid #b7b7b7;
-    padding: 11px 8px;
+    padding: 11px 8px 11px 0;
 }
 
 .highlight {
@@ -327,6 +329,19 @@ footer {
     ul {
         padding-left: 1.3em;
         list-style-type: square;
+    }
+
+
+    button.btn {
+        border-radius: 0;
+        .small-caps;
+        border: 1px solid #559dc0;
+        background-color: white;
+    }
+
+    button.btn:hover{
+        background:#559dc0;
+        color:#fff;
     }
 }
 

@@ -6531,6 +6531,7 @@ footer {
   letter-spacing: 0.1em;
   padding-top: 1em;
   text-align: center;
+  font-size: 0.8em !important;
 }
 footer a {
   color: #cccccc;
@@ -6578,7 +6579,7 @@ footer a:hover {
   font-family: "Garamond", serif;
   font-size: 2em;
   border: 0px;
-  padding: 11px 8px;
+  padding: 11px 8px 11px 0;
 }
 .highlight {
   background-color: #559dc0;
@@ -6671,6 +6672,20 @@ footer a:hover {
 .card ul {
   padding-left: 1.3em;
   list-style-type: square;
+}
+.card button.btn {
+  border-radius: 0;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid #559dc0;
+  background-color: white;
+}
+.card button.btn:hover {
+  background: #559dc0;
+  color: #fff;
 }
 /* Nav Tabs aka a mess right now. */
 .card-tabs .nav-tabs {
