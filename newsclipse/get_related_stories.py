@@ -1,7 +1,47 @@
 #from BeautifulSoup import BeautifulSoup
 import re
 import urllib
+from BeautifulSoup import BeautifulSoup
 
+def get_related_to_person(entities, person):
+    tags_entities = []
+    for e in entities:
+        if e['card'] != 'entity':
+            tags_entities.append(e)
+
+    tags_entities.sort(key=lambda x: -x['relevance'])
+
+    tags = [tag['title'] for tag in tags]
+    results = []
+    link_set = set()
+    t1, t2, t3 = tags[:3]
+    search1 = ', '.join([person, t1, t2])
+    search2 = ', '.join([person, t1, t3])
+    search3 = ', '.join([person, t2, t3])
+    for search in [search1, search2, search3]:
+        site = urllib.urlopen('http://duckduckgo.com/html/?q=%s' % search)
+        data = site.read()
+        parsed = BeautifulSoup(data)
+        parsed = parsed.findAll('div', {'class': re.compile('links_main*')})
+        count = 0
+        for result in parsed:
+            if result.span:
+                if result.span.text == "No results.":
+                    continue
+            p = result
+            link = p.a['href']
+            if link in link_set:
+                continue
+            link_set.add(link)
+            d = p.div
+            innerhtml = "".join([str(x) for x in d.contents])
+            content = innerhtml.replace('<b>', '').replace('</b>', '')
+            print link
+            results.append((link, content))
+            count+=1
+            if count==2:
+                break
+    return results
 
 def get_related(entities):
     all_entities = []
