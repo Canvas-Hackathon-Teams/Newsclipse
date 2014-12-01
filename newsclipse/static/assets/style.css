@@ -6663,8 +6663,7 @@ footer a:hover {
 .card .card-title:hover {
   color: #559dc0;
 }
-
-.card .card-title-edit {
+.card .card-title.card-title-edit {
   width: 70%;
   margin-top: 0.6em;
   padding-top: 0.1em;
@@ -6805,6 +6804,45 @@ footer a:hover {
 #story-list td.cards {
   color: #B3B3B3;
 }
+#story-list td.cards {
+  text-align: right;
+}
 .table > thead > tr > th {
   border-bottom: none;
+}
+.new-card .cur {
+  color: #559dc0;
+}
+.new-card .title-field {
+  padding-bottom: 2em;
+}
+.new-card .title-field input {
+  font-size: 1.3em;
+  width: 100%;
+  padding: 0.2em;
+}
+.new-card input.btn {
+  border-radius: 0;
+  float: right;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid #559dc0;
+  background-color: white;
+}
+.new-card .pseudo_link {
+  height: 3em;
+  margin-right: 1em;
+  padding: 0.2em;
+  opacity: 0.7;
+}
+.new-card .pseudo_link.active {
+  opacity: 1;
+  border-bottom: 3px solid #559dc0;
+}
+.new-card input.btn:hover {
+  background: #559dc0;
+  color: #fff;
 }
