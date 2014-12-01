@@ -79,6 +79,7 @@ def save_evidence(card, evidence):
         evidence['cards'] = list(set(existing['cards'] + [card['_id']]))
     evidence['updated_at'] = datetime.utcnow()
     evidence['score'] = evidence.get('score') or 0
+    evidence.pop('_id', None)
     evidences.update(q, evidence, upsert=True)
     evidence = evidences.find_one(q)
     op = {'$addToSet': {'evidences': evidence['_id']}}
