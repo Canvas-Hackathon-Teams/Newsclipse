@@ -1,10 +1,26 @@
-<form ng-submit="saveCard()">
+<form ng-submit="saveCard()" class="new-card">
+  <br/><br/>
+  <div class="row">
+    <div class="col-md-8">
+      <h3 class="sub_header">Create a card for a <span class="cur">{{card.type}}</span></h3>
+    </div>
+    <div class="col-md-4" class="types-field">
+      <img ng-click="selectType(0)" class="pseudo_link"
+        src="/static/img/company.png" ng-class="{'active': card.type == 'Company'}" />
+      <img ng-click="selectType(1)" class="pseudo_link"
+        src="/static/img/person.png" ng-class="{'active': card.type == 'Person'}" />
+      <img ng-click="selectType(2)" class="pseudo_link"
+        src="/static/img/institution.png" ng-class="{'active': card.type == 'Organization'}" />
+    </div>
+    <div class="col-md-12 title-field">
+      <input class="card-title card-title-edit" ng-model="card.title" placeholder="Person, Company or Organization name">
+    </div>
+    <div class="col-md-12">
+      <input type="submit" value="Create" class="btn" label="submit" ng-disabled="!canSubmit()"></input>
+    </div>
+  </div>
+  
 
-
-<img ng-click="selectType(0)" class="pseudo_link" src="/static/img/company.png"/>
-<img ng-click="selectType(1)" class="pseudo_link" src="/static/img/person.png"/>
-<img ng-click="selectType(2)" class="pseudo_link" src="/static/img/institution.png"/>
-
-<input class="card-title card-title-edit" ng-model="card.title">
-<input type="submit" label="submit"></input>
+  
+  
 </form>

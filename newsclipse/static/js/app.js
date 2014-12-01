@@ -1,4 +1,4 @@
-var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar']);
+var nclipse = angular.module('nclipse', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'angular-loading-bar', 'contenteditable', 'truncate']);
 
 nclipse.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
   cfpLoadingBarProvider.includeSpinner = false;
@@ -45,6 +45,13 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
   $scope.cards = [];
   $scope.activeCards = 0;
   $scope.discardedCards = 0;
+  $scope.tabs = {
+    'pending': true
+  };
+
+  $scope.$on('pendingTab', function() {
+    $scope.tabs.pending = true;
+  });
 
   $http.get('/api/stories/' + $scope.storyId).then(function(res) {
     $scope.story = res.data;
@@ -203,7 +210,7 @@ nclipse.directive('nclipseCard', ['$http', 'cfpLoadingBar', function($http, cfpL
 }]);
 
 
-nclipse.directive('nclipseNewCard', ['$http', function($http) {
+nclipse.directive('nclipseNewCard', ['$http', 'cfpLoadingBar', function($http, cfpLoadingBar) {
   return {
     restrict: 'E',
     transclude: true,
@@ -214,17 +221,23 @@ nclipse.directive('nclipseNewCard', ['$http', function($http) {
     link: function (scope, element, attrs, model) {
       scope.card = {'score': 100, 'type': 'Company'};
       scope.typeOptions = ["Company", "Person", "Organization"];
-      
 
-      scope.selectType = function(index){
-          scope.card.type = scope.typeOptions[index];
-          console.log(scope.card.type);
-      }
+      scope.selectType = function(index) {
+        scope.card.type = scope.typeOptions[index];
+      };
+
+      scope.canSubmit = function() {
+        return scope.card.title && scope.card.title.length > 1;
+      };
 
       scope.saveCard = function() {
+        if (!scope.canSubmit()) return;
         cfpLoadingBar.start();
+        var card = angular.copy(scope.card);
+        scope.card = {'score': 100, 'type': 'Company'};
         var url = '/api/stories/' + scope.story._id + '/cards';
-        $http.post(url, scope.card).then(function(res) {
+        scope.$emit('pendingTab');
+        $http.post(url, card).then(function(res) {
           scope.card = res.data;
           cfpLoadingBar.complete();
         });

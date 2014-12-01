@@ -18,7 +18,7 @@
   </div>
   <div class="col-md-7 border_right">
     <tabset justified="true" class="card-tabs">
-      <tab heading="{{activeCards}} Cards" disabled="!activeCards">
+      <tab heading="{{activeCards}} Cards" disabled="!activeCards" active="tabs.pending">
         <div class="card-list">
           <div ng-repeat="card in cards" ng-hide="card.discarded">
             <nclipse-card story="story" card="card"></nclipse-card>

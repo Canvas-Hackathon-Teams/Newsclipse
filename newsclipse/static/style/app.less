@@ -199,7 +199,7 @@ footer {
 }
 
 .btn_analyse{
-    border:1px solid #559dc0;
+    border: 1px solid #559dc0;
     margin: 0 0 16px 0;
 }
 
@@ -471,3 +471,45 @@ footer {
 .table > thead > tr > th {
     border-bottom: none;
 }
+
+.new-card {
+    .cur {
+        color: @brand-primary;
+    }
+
+    .title-field {
+        padding-bottom: 2em;
+
+        input {
+            font-size: 1.3em;
+            width: 100%;
+            padding: 0.2em;
+        }
+    }
+
+    input.btn {
+        border-radius: 0;
+        float: right;
+        .small-caps;
+        border: 1px solid #559dc0;
+        background-color: white;
+    }
+
+    .pseudo_link {
+        height: 3em;
+        margin-right: 1em;
+        padding: 0.2em;
+        opacity: 0.7;
+    }
+
+    .pseudo_link.active {
+        opacity: 1;
+        border-bottom: 3px solid @brand-primary;
+    }
+
+    input.btn:hover{
+        background:#559dc0;
+        color:#fff;
+    }
+}
+

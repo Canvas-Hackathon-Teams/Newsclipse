@@ -55,7 +55,7 @@ def save_card(story, card, aliases=False, lookup=True):
         data['evidences'] = old.get('evidences')
         cards.update(q, {'$set': data})
     else:
-        cards.insert(data)
+        q['_id'] = cards.insert(data)
 
     card = cards.find_one(q)
     op = {'$addToSet': {'cards': card['_id']}}
