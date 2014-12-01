@@ -82,7 +82,9 @@ nclipse.controller('StoryCtrl', ['$scope', '$routeParams', '$location', '$interv
         var exists = false;
         angular.forEach($scope.cards, function(o) {
           if (o['_id'] == c['_id']) {
-            exists = true; 
+            exists = true;
+            o.evidences = c.evidences;
+            o.wiki_text = c.wiki_text;
           }
         });
         if (!exists) newCards.push(c);
