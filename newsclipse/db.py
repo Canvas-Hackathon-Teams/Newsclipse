@@ -53,6 +53,7 @@ def save_card(story, card, aliases=False, lookup=True):
         data['stories'] = list(set(old.get('stories') + [story['_id']]))
         data['aliases'] = list(set(old.get('aliases') + data.get('aliases')))
         data['evidences'] = old.get('evidences')
+        data.pop('_id', None)
         cards.update(q, {'$set': data})
     else:
         q['_id'] = cards.insert(data)
